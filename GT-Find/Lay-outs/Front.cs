@@ -5,6 +5,7 @@ namespace GT_Find
         public Front()
         {
             InitializeComponent();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
