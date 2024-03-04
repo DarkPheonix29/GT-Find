@@ -67,6 +67,7 @@
             Log_in.TabIndex = 1;
             Log_in.Text = "Log in";
             Log_in.UseVisualStyleBackColor = false;
+            Log_in.Click += gotologinpage;
             // 
             // Sign_up
             // 
@@ -152,7 +153,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1532, 931);
+            ClientSize = new Size(1532, 928);
             Controls.Add(pictureBox2);
             Controls.Add(label4);
             Controls.Add(label3);

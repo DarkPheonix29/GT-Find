@@ -2,6 +2,7 @@ namespace GT_Find
 {
     public partial class Front : Form
     {
+
         public Front()
         {
             InitializeComponent();
@@ -13,9 +14,13 @@ namespace GT_Find
 
         }
 
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        public void gotologinpage(object sender, EventArgs e)
         {
+            Login login = new Login();
 
+            login.Show();
+
+            this.Hide();
         }
     }
 }
