@@ -33,10 +33,10 @@
             Logo = new PictureBox();
             label1 = new Label();
             emailtext = new TextBox();
-            textBox1 = new TextBox();
+            passtxt = new TextBox();
             label2 = new Label();
             label3 = new Label();
-            button1 = new Button();
+            loginbtn = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Logo).BeginInit();
             SuspendLayout();
@@ -73,7 +73,6 @@
             label1.Size = new Size(233, 98);
             label1.TabIndex = 11;
             label1.Text = "Log In";
-            label1.Click += label1_Click;
             // 
             // emailtext
             // 
@@ -86,15 +85,15 @@
             emailtext.TabIndex = 12;
             emailtext.TextChanged += emailtext_TextChanged;
             // 
-            // textBox1
+            // passtxt
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.ForeColor = SystemColors.WindowText;
-            textBox1.Location = new Point(600, 551);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(362, 43);
-            textBox1.TabIndex = 13;
+            passtxt.BorderStyle = BorderStyle.FixedSingle;
+            passtxt.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            passtxt.ForeColor = SystemColors.WindowText;
+            passtxt.Location = new Point(600, 551);
+            passtxt.Name = "passtxt";
+            passtxt.Size = new Size(362, 43);
+            passtxt.TabIndex = 13;
             // 
             // label2
             // 
@@ -105,7 +104,6 @@
             label2.Size = new Size(228, 35);
             label2.TabIndex = 14;
             label2.Text = "Username or Email";
-            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -117,17 +115,18 @@
             label3.TabIndex = 15;
             label3.Text = "Password";
             // 
-            // button1
+            // loginbtn
             // 
-            button1.BackColor = Color.DarkOrange;
-            button1.Font = new Font("Impact", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(701, 641);
-            button1.Name = "button1";
-            button1.Size = new Size(145, 46);
-            button1.TabIndex = 16;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = false;
+            loginbtn.BackColor = Color.DarkOrange;
+            loginbtn.Font = new Font("Impact", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            loginbtn.ForeColor = Color.White;
+            loginbtn.Location = new Point(701, 641);
+            loginbtn.Name = "loginbtn";
+            loginbtn.Size = new Size(145, 46);
+            loginbtn.TabIndex = 16;
+            loginbtn.Text = "Login";
+            loginbtn.UseVisualStyleBackColor = false;
+            loginbtn.Click += gotohomepage;
             // 
             // Login
             // 
@@ -135,10 +134,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1532, 928);
-            Controls.Add(button1);
+            Controls.Add(loginbtn);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(passtxt);
             Controls.Add(emailtext);
             Controls.Add(label1);
             Controls.Add(Logo);
@@ -157,9 +156,9 @@
         private PictureBox Logo;
         private Label label1;
         private TextBox emailtext;
-        private TextBox textBox1;
+        private TextBox passtxt;
         private Label label2;
         private Label label3;
-        private Button button1;
+        private Button loginbtn;
     }
 }

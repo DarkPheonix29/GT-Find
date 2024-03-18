@@ -83,6 +83,7 @@
             Sign_up.TabIndex = 2;
             Sign_up.Text = "Sign up";
             Sign_up.UseVisualStyleBackColor = false;
+            Sign_up.Click += gotosignuppage;
             // 
             // label1
             // 

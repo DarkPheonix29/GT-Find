@@ -22,5 +22,14 @@ namespace GT_Find
 
             this.Hide();
         }
+
+        public void gotosignuppage(object sender, EventArgs e)
+        {
+            Signup signup = new Signup();
+
+            signup.Show();
+
+            this.Hide();
+        }
     }
 }

@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GT_Find
+namespace GT_Find.Lay_outs
 {
-    public partial class Signup : Form
+    public partial class Find : Form
     {
-        public Signup()
+        public Find()
         {
             InitializeComponent();
-        }
-
-        private void Signup_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

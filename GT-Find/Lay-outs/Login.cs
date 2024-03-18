@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GT_Find.Lay_outs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,17 +18,16 @@ namespace GT_Find
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void gotohomepage (object sender, EventArgs e)
         {
+            Home home = new Home();
 
+            home.Show();
+
+            this.Hide();
         }
 
         private void emailtext_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
         {
 
         }
