@@ -36,10 +36,10 @@
             findlbl = new Label();
             homelbl = new Label();
             pictureBox2 = new PictureBox();
-            textBox1 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox2 = new TextBox();
+            boitext = new TextBox();
+            regiontxt = new TextBox();
+            countrytxt = new TextBox();
+            platformtxt = new TextBox();
             fun4 = new CheckBox();
             fun2 = new CheckBox();
             fun3 = new CheckBox();
@@ -65,6 +65,15 @@
             ded3 = new CheckBox();
             ded2 = new CheckBox();
             ded4 = new CheckBox();
+            label4 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
             ((System.ComponentModel.ISupportInitialize)Logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -144,35 +153,41 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += openmenu;
             // 
-            // textBox1
+            // boitext
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Location = new Point(12, 355);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(717, 125);
-            textBox1.TabIndex = 23;
+            boitext.BorderStyle = BorderStyle.FixedSingle;
+            boitext.Location = new Point(12, 355);
+            boitext.Multiline = true;
+            boitext.Name = "boitext";
+            boitext.Size = new Size(717, 125);
+            boitext.TabIndex = 23;
             // 
-            // textBox4
+            // regiontxt
             // 
-            textBox4.Location = new Point(12, 575);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(172, 27);
-            textBox4.TabIndex = 26;
+            regiontxt.AutoCompleteCustomSource.AddRange(new string[] { "Africa", "Asia", "Central America", "Europe", "Middle East", "North America.", "Pacific", "South America" });
+            regiontxt.AutoCompleteMode = AutoCompleteMode.Suggest;
+            regiontxt.Location = new Point(12, 575);
+            regiontxt.Name = "regiontxt";
+            regiontxt.Size = new Size(172, 27);
+            regiontxt.TabIndex = 26;
             // 
-            // textBox5
+            // countrytxt
             // 
-            textBox5.Location = new Point(12, 663);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(172, 27);
-            textBox5.TabIndex = 27;
+            countrytxt.AutoCompleteCustomSource.AddRange(new string[] { "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Austrian Empire*", "Azerbaijan", "Baden*", "Bahamas, The", "Bahrain", "Bangladesh", "Barbados", "Bavaria*", "Belarus", "Belgium", "Belize", "Benin (Dahomey)", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Brunswick and Lüneburg*", "Bulgaria", "Burkina Faso (Upper Volta)", "Burma", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Cayman Islands, The", "Central African Republic", "Central American Federation*", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo Free State, The*", "Costa Rica", "Cote d’Ivoire (Ivory Coast)", "Croatia", "Cuba", "Cyprus", "Czechia", "Czechoslovakia*", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Duchy of Parma, The*", "East Germany (German Democratic Republic)*", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Federal Government of Germany (1848-49)*", "Fiji", "Finland", "France", "Gabon", "Gambia, The", "Georgia", "Germany", "Ghana", "Grand Duchy of Tuscany, The*", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Hanover*", "Hanseatic Republics*", "Hawaii*", "Hesse*", "Holy See", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kingdom of Serbia/Yugoslavia*", "Kiribati", "Korea", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Lew Chew (Loochoo)*", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mecklenburg-Schwerin*", "Mecklenburg-Strelitz*", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Namibia", "Nassau*", "Nauru", "Nepal", "Netherlands, The", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North German Confederation*", "North German Union*", "North Macedonia", "Norway", "Oldenburg*", "Oman", "Orange Free State*", "Pakistan", "Palau", "Panama", "Papal States*", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Piedmont-Sardinia*", "Poland", "Portugal", "Qatar", "Republic of Genoa*", "Republic of Korea (South Korea)", "Republic of the Congo", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Schaumburg-Lippe*", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands, The", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Texas*", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Two Sicilies*", "Uganda", "Ukraine", "Union of Soviet Socialist Republics*", "United Arab Emirates, The", "United Kingdom, The", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Württemberg*", "Yemen", "ZZambia", "Zimbabwe" });
+            countrytxt.AutoCompleteMode = AutoCompleteMode.Suggest;
+            countrytxt.Location = new Point(12, 663);
+            countrytxt.Name = "countrytxt";
+            countrytxt.Size = new Size(172, 27);
+            countrytxt.TabIndex = 27;
             // 
-            // textBox2
+            // platformtxt
             // 
-            textBox2.Location = new Point(12, 753);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(172, 27);
-            textBox2.TabIndex = 28;
+            platformtxt.AutoCompleteCustomSource.AddRange(new string[] { "PC", "PlayStation 5", "Nintendo Switch", "Xbox Series X", "Mobile" });
+            platformtxt.AutoCompleteMode = AutoCompleteMode.Suggest;
+            platformtxt.Location = new Point(12, 753);
+            platformtxt.Name = "platformtxt";
+            platformtxt.Size = new Size(172, 27);
+            platformtxt.TabIndex = 28;
             // 
             // fun4
             // 
@@ -449,12 +464,111 @@
             ded4.Text = "4";
             ded4.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Impact", 12.2F);
+            label4.Location = new Point(12, 326);
+            label4.Name = "label4";
+            label4.Size = new Size(40, 26);
+            label4.TabIndex = 54;
+            label4.Text = "Bio";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Impact", 12.2F);
+            label2.Location = new Point(12, 546);
+            label2.Name = "label2";
+            label2.Size = new Size(72, 26);
+            label2.TabIndex = 55;
+            label2.Text = "Region";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Impact", 12.2F);
+            label3.Location = new Point(12, 634);
+            label3.Name = "label3";
+            label3.Size = new Size(80, 26);
+            label3.TabIndex = 56;
+            label3.Text = "Country";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Impact", 12.2F);
+            label5.Location = new Point(12, 724);
+            label5.Name = "label5";
+            label5.Size = new Size(85, 26);
+            label5.TabIndex = 57;
+            label5.Text = "Platform";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Impact", 12.2F);
+            label6.Location = new Point(1298, 421);
+            label6.Name = "label6";
+            label6.Size = new Size(42, 26);
+            label6.TabIndex = 58;
+            label6.Text = "Fun";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Impact", 12.2F);
+            label7.Location = new Point(1298, 496);
+            label7.Name = "label7";
+            label7.Size = new Size(114, 26);
+            label7.TabIndex = 59;
+            label7.Text = "Competitive";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Impact", 12.2F);
+            label8.Location = new Point(1298, 571);
+            label8.Name = "label8";
+            label8.Size = new Size(79, 26);
+            label8.TabIndex = 60;
+            label8.Text = "Serious";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Impact", 12.2F);
+            label9.Location = new Point(1298, 646);
+            label9.Name = "label9";
+            label9.Size = new Size(146, 26);
+            label9.TabIndex = 61;
+            label9.Text = "Communication";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Impact", 12.2F);
+            label10.Location = new Point(1299, 721);
+            label10.Name = "label10";
+            label10.Size = new Size(105, 26);
+            label10.TabIndex = 62;
+            label10.Text = "Dedication";
+            // 
             // Profile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1532, 928);
+            Controls.Add(label10);
+            Controls.Add(label9);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label4);
             Controls.Add(ded5);
             Controls.Add(ded1);
             Controls.Add(ded3);
@@ -480,10 +594,10 @@
             Controls.Add(fun3);
             Controls.Add(fun2);
             Controls.Add(fun4);
-            Controls.Add(textBox2);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox1);
+            Controls.Add(platformtxt);
+            Controls.Add(countrytxt);
+            Controls.Add(regiontxt);
+            Controls.Add(boitext);
             Controls.Add(profilelbl);
             Controls.Add(findlbl);
             Controls.Add(homelbl);
@@ -510,11 +624,11 @@
         private Label findlbl;
         private Label homelbl;
         private PictureBox pictureBox2;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox boitext;
+        private TextBox platformtxt;
         private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox regiontxt;
+        private TextBox countrytxt;
         private CheckBox fun4;
         private CheckBox fun2;
         private CheckBox fun3;
@@ -540,5 +654,14 @@
         private CheckBox ded3;
         private CheckBox ded2;
         private CheckBox ded4;
+        private Label label4;
+        private Label label2;
+        private Label label3;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label label8;
+        private Label label9;
+        private Label label10;
     }
 }

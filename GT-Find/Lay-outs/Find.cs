@@ -16,5 +16,10 @@ namespace GT_Find.Lay_outs
         {
             InitializeComponent();
         }
+
+        private void Find_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
