@@ -44,5 +44,22 @@ namespace GT_Find.Lay_outs
                 profilelbl.Visible = false;
             }
         }
+
+        public void gotofindpage(object sender, EventArgs e)
+        {
+            Find find = new Find();
+
+            find.Show();
+
+            this.Hide();
+        }
+        public void gotohomepage(object sender, EventArgs e)
+        {
+            Home home = new Home();
+
+            home.Show();
+
+            this.Hide();
+        }
     }
 }

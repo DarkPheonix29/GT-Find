@@ -131,6 +131,7 @@
             findlbl.Size = new Size(54, 29);
             findlbl.TabIndex = 21;
             findlbl.Text = "Find";
+            findlbl.Click += gotofindpage;
             // 
             // homelbl
             // 
@@ -141,6 +142,7 @@
             homelbl.Size = new Size(69, 29);
             homelbl.TabIndex = 20;
             homelbl.Text = "Home";
+            homelbl.Click += gotohomepage;
             // 
             // pictureBox2
             // 
