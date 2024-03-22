@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GT-Find", "GT-Find\GT-Find.csproj", "{6FE24AAD-620C-4FCD-A574-9FFCF6AE0CB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{ADFAD03B-CEE5-4F32-AC9D-51187302FDA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{ADFAD03B-CEE5-4F32-AC9D-51187302FDA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{4DABAB92-61E1-4B63-ADEF-357505AA1B5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{ADFAD03B-CEE5-4F32-AC9D-51187302FDA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADFAD03B-CEE5-4F32-AC9D-51187302FDA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADFAD03B-CEE5-4F32-AC9D-51187302FDA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DABAB92-61E1-4B63-ADEF-357505AA1B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DABAB92-61E1-4B63-ADEF-357505AA1B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DABAB92-61E1-4B63-ADEF-357505AA1B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DABAB92-61E1-4B63-ADEF-357505AA1B5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
