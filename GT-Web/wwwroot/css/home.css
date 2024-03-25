@@ -1,0 +1,39 @@
+.content {
+    padding: 50px;
+    position: relative;
+}
+
+@media only screen and (min-width: 960px) {
+    .navbar {
+        position: absolute;
+    }
+
+    .main {
+        height: 100%;
+    }
+
+}
+
+.title {
+    color: #f08c00;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+}
+
+.highlight {
+    color: #200a58;
+    font-weight: bold;
+}
+
+body {
+    background-image: url('../image/eps10-orange-halftone-dotted-pattern-artwork-isolated-on-white-background-circular-geometric-abstract-pattern-in-a-simple-flat-trendy-modern-style-for-your-website-design-and-mobile-app-vector.jpg');
+    
+}
+
+footer {
+    background-color: #efefef;
+}
