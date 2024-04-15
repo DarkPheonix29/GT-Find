@@ -1,0 +1,27 @@
+@font-face {
+    font-family: Impact;
+    src: url(../fonts/Impact.ttf);
+}
+
+html, body {
+    font-family: Impact;
+    text-transform: none;
+    font-style: normal;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    height: 100%;
+    background-color: #f08c00;
+}
+
+.navbar {
+    color: #000;
+    border-bottom: 1px solid #d2d2d2;
+    -webkit-box-shadow: 0 0.5px 1px rgba(0,0,0,0.25);
+    box-shadow: 0 0.5px 1px rgba(0,0,0,0.25);
+    font-weight: bold;
+    z-index: 999;
+}
+
+.main {
+    background-color: #00000000;
+}
