@@ -9,6 +9,6 @@ namespace BLL
 {
     public interface IFind
     {
-        static MySqlConnection GetConnection();
+        
     }
 }
