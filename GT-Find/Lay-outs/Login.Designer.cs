@@ -32,7 +32,7 @@
             pictureBox1 = new PictureBox();
             Logo = new PictureBox();
             label1 = new Label();
-            emailtext = new TextBox();
+            usertext = new TextBox();
             passtxt = new TextBox();
             label2 = new Label();
             label3 = new Label();
@@ -74,16 +74,15 @@
             label1.TabIndex = 11;
             label1.Text = "Log In";
             // 
-            // emailtext
+            // usertext
             // 
-            emailtext.BorderStyle = BorderStyle.FixedSingle;
-            emailtext.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            emailtext.ForeColor = SystemColors.WindowText;
-            emailtext.Location = new Point(600, 409);
-            emailtext.Name = "emailtext";
-            emailtext.Size = new Size(362, 43);
-            emailtext.TabIndex = 12;
-            emailtext.TextChanged += emailtext_TextChanged;
+            usertext.BorderStyle = BorderStyle.FixedSingle;
+            usertext.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            usertext.ForeColor = SystemColors.WindowText;
+            usertext.Location = new Point(600, 409);
+            usertext.Name = "usertext";
+            usertext.Size = new Size(362, 43);
+            usertext.TabIndex = 12;
             // 
             // passtxt
             // 
@@ -138,7 +137,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(passtxt);
-            Controls.Add(emailtext);
+            Controls.Add(usertext);
             Controls.Add(label1);
             Controls.Add(Logo);
             Controls.Add(pictureBox1);
@@ -155,7 +154,7 @@
         private PictureBox pictureBox1;
         private PictureBox Logo;
         private Label label1;
-        private TextBox emailtext;
+        private TextBox usertext;
         private TextBox passtxt;
         private Label label2;
         private Label label3;

@@ -23,10 +23,10 @@ namespace GT_Find
         private void gotohomepage(object sender, EventArgs e)
         {
 
-            string username = emailtext.Text;
+            string username = usertext.Text;
             string password = passtxt.Text;
 
-            if (AuthManager.AuthenticateUser(email, username, password))
+            if (AuthManager.AuthenticateUser(username, password))
             {
                 MessageBox.Show("Login successful!");
                 // Redirect or perform necessary actions after successful login
@@ -42,12 +42,5 @@ namespace GT_Find
             }
 
         }
-
-        private void emailtext_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }
