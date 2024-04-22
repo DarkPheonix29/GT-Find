@@ -101,9 +101,9 @@
             label2.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(600, 344);
             label2.Name = "label2";
-            label2.Size = new Size(228, 35);
+            label2.Size = new Size(132, 35);
             label2.TabIndex = 14;
-            label2.Text = "Username or Email";
+            label2.Text = "Username";
             // 
             // label3
             // 

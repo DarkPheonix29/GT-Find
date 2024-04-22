@@ -20,12 +20,13 @@ namespace GT_Find
             InitializeComponent();
         }
 
-        private void gotohomepage (object sender, EventArgs e)
+        private void gotohomepage(object sender, EventArgs e)
         {
+
             string username = emailtext.Text;
             string password = passtxt.Text;
 
-            if (AuthManager.AuthenticateUser(username, password))
+            if (AuthManager.AuthenticateUser(email, username, password))
             {
                 MessageBox.Show("Login successful!");
                 // Redirect or perform necessary actions after successful login
@@ -39,12 +40,14 @@ namespace GT_Find
             {
                 MessageBox.Show("Invalid username or password.");
             }
-            
+
         }
 
         private void emailtext_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+
     }
 }
