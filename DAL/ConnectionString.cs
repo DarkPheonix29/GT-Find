@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class ConnectionString
+    public class ConnectionString 
     {
         public static MySqlConnection GetConnection()
         {

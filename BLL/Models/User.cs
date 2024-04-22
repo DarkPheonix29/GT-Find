@@ -1,4 +1,6 @@
-﻿namespace BLL.Models
+﻿using DAL;
+
+namespace BLL.Models
 {
     public class User
     {
@@ -9,5 +11,11 @@
         public int Serious { get; set; }
         public int Communication { get; set; }
         public int Dedication { get; set; }
+        List<String> Games { get; set; }
+
+        public void GetUserStats() 
+        {
+            
+        }
     }
 }
