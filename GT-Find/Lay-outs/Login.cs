@@ -26,7 +26,7 @@ namespace GT_Find
             string username = emailtext.Text;
             string password = passtxt.Text;
 
-            if (AuthManager.AuthenticateUser(email, username, password))
+            if (AuthManager.AuthenticateUser(username, password))
             {
                 MessageBox.Show("Login successful!");
                 // Redirect or perform necessary actions after successful login
