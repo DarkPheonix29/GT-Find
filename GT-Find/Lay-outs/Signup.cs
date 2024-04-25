@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using GT_Find.Lay_outs;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,12 +33,18 @@ namespace GT_Find
             string constring = "server=" + server + ";uid=" + uid + ";database=" + database + ";pwd=" + password + ";";
             MySqlConnection con = new MySqlConnection(constring);
             con.Open();
-            string query = "insert into account (Email, Password, Username) values('"+ emailsutext.Text+"','"+passsutext.Text+"','"+usertext.Text+"')";
+            string query = "insert into account (Email, Password, Username) values('"+ emailsutext.Text+"','"+passsutext.Text+"','"+usersutext.Text+"')";
             MySqlCommand cmd = new MySqlCommand(query, con);
             int i = cmd.ExecuteNonQuery();
             if (i > -1) 
             {
-                MessageBox.Show("Data Succesfully inserted");
+                MessageBox.Show("Account Created!");
+
+                Login login = new Login();
+
+                login.Show();
+
+                this.Hide();
             }
 
         }

@@ -35,7 +35,7 @@
             emailsutext = new TextBox();
             passsutext = new TextBox();
             passsutext2 = new TextBox();
-            usertext = new TextBox();
+            usersutext = new TextBox();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
@@ -108,15 +108,15 @@
             passsutext2.Size = new Size(362, 43);
             passsutext2.TabIndex = 15;
             // 
-            // usertext
+            // usersutext
             // 
-            usertext.BorderStyle = BorderStyle.FixedSingle;
-            usertext.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            usertext.ForeColor = SystemColors.WindowText;
-            usertext.Location = new Point(292, 588);
-            usertext.Name = "usertext";
-            usertext.Size = new Size(362, 43);
-            usertext.TabIndex = 16;
+            usersutext.BorderStyle = BorderStyle.FixedSingle;
+            usersutext.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            usersutext.ForeColor = SystemColors.WindowText;
+            usersutext.Location = new Point(292, 588);
+            usersutext.Name = "usersutext";
+            usersutext.Size = new Size(362, 43);
+            usersutext.TabIndex = 16;
             // 
             // label4
             // 
@@ -182,7 +182,7 @@
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(usertext);
+            Controls.Add(usersutext);
             Controls.Add(passsutext2);
             Controls.Add(passsutext);
             Controls.Add(emailsutext);
@@ -206,7 +206,7 @@
         private TextBox emailsutext;
         private TextBox passsutext;
         private TextBox passsutext2;
-        private TextBox usertext;
+        private TextBox usersutext;
         private Label label4;
         private Label label5;
         private Label label6;
