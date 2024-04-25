@@ -23,8 +23,8 @@ namespace GT_Find
         private void gotohomepage(object sender, EventArgs e)
         {
 
-            string username = emailtext.Text;
-            string password = passtxt.Text;
+            string username = userlogtext.Text;
+            string password = passlogtxt.Text;
 
             if (AuthManager.AuthenticateUser(username, password))
             {

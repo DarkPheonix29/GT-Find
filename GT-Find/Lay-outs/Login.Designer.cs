@@ -32,8 +32,8 @@
             pictureBox1 = new PictureBox();
             Logo = new PictureBox();
             label1 = new Label();
-            emailtext = new TextBox();
-            passtxt = new TextBox();
+            userlogtext = new TextBox();
+            passlogtxt = new TextBox();
             label2 = new Label();
             label3 = new Label();
             loginbtn = new Button();
@@ -74,26 +74,26 @@
             label1.TabIndex = 11;
             label1.Text = "Log In";
             // 
-            // emailtext
+            // userlogtext
             // 
-            emailtext.BorderStyle = BorderStyle.FixedSingle;
-            emailtext.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            emailtext.ForeColor = SystemColors.WindowText;
-            emailtext.Location = new Point(600, 409);
-            emailtext.Name = "emailtext";
-            emailtext.Size = new Size(362, 43);
-            emailtext.TabIndex = 12;
-            emailtext.TextChanged += emailtext_TextChanged;
+            userlogtext.BorderStyle = BorderStyle.FixedSingle;
+            userlogtext.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            userlogtext.ForeColor = SystemColors.WindowText;
+            userlogtext.Location = new Point(600, 409);
+            userlogtext.Name = "userlogtext";
+            userlogtext.Size = new Size(362, 43);
+            userlogtext.TabIndex = 12;
+            userlogtext.TextChanged += emailtext_TextChanged;
             // 
-            // passtxt
+            // passlogtxt
             // 
-            passtxt.BorderStyle = BorderStyle.FixedSingle;
-            passtxt.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passtxt.ForeColor = SystemColors.WindowText;
-            passtxt.Location = new Point(600, 551);
-            passtxt.Name = "passtxt";
-            passtxt.Size = new Size(362, 43);
-            passtxt.TabIndex = 13;
+            passlogtxt.BorderStyle = BorderStyle.FixedSingle;
+            passlogtxt.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            passlogtxt.ForeColor = SystemColors.WindowText;
+            passlogtxt.Location = new Point(600, 551);
+            passlogtxt.Name = "passlogtxt";
+            passlogtxt.Size = new Size(362, 43);
+            passlogtxt.TabIndex = 13;
             // 
             // label2
             // 
@@ -137,8 +137,8 @@
             Controls.Add(loginbtn);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(passtxt);
-            Controls.Add(emailtext);
+            Controls.Add(passlogtxt);
+            Controls.Add(userlogtext);
             Controls.Add(label1);
             Controls.Add(Logo);
             Controls.Add(pictureBox1);
@@ -155,8 +155,8 @@
         private PictureBox pictureBox1;
         private PictureBox Logo;
         private Label label1;
-        private TextBox emailtext;
-        private TextBox passtxt;
+        private TextBox userlogtext;
+        private TextBox passlogtxt;
         private Label label2;
         private Label label3;
         private Button loginbtn;
