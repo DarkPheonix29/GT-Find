@@ -86,7 +86,7 @@
             emailsutext.Location = new Point(292, 393);
             emailsutext.Name = "emailsutext";
             emailsutext.Size = new Size(362, 43);
-            emailsutext.TabIndex = 13;
+            emailsutext.TabIndex = 1;
             // 
             // passsutext
             // 
@@ -95,8 +95,9 @@
             passsutext.ForeColor = SystemColors.WindowText;
             passsutext.Location = new Point(900, 393);
             passsutext.Name = "passsutext";
+            passsutext.PasswordChar = '*';
             passsutext.Size = new Size(362, 43);
-            passsutext.TabIndex = 14;
+            passsutext.TabIndex = 3;
             // 
             // passsutext2
             // 
@@ -105,8 +106,9 @@
             passsutext2.ForeColor = SystemColors.WindowText;
             passsutext2.Location = new Point(900, 588);
             passsutext2.Name = "passsutext2";
+            passsutext2.PasswordChar = '*';
             passsutext2.Size = new Size(362, 43);
-            passsutext2.TabIndex = 15;
+            passsutext2.TabIndex = 4;
             // 
             // usersutext
             // 
@@ -116,7 +118,7 @@
             usersutext.Location = new Point(292, 588);
             usersutext.Name = "usersutext";
             usersutext.Size = new Size(362, 43);
-            usersutext.TabIndex = 16;
+            usersutext.TabIndex = 2;
             // 
             // label4
             // 

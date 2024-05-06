@@ -9,33 +9,15 @@ namespace BLL
 {
     public class AuthManager
     {
-        public static bool AuthenticateUser(string username, string password)
+        public static bool ValidateUser(string passwordtext, string databaseHash)
         {
-            using (var connection = ConnectionString.GetConnection())
-            {
-                connection.Open();
-                using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM account WHERE Username = @Username AND Password = @Password", connection))
-                {
-                    cmd.Parameters.AddWithValue("@Username", username);
-                    cmd.Parameters.AddWithValue("@Password", EncryptPassword(password));
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 0;
-                }
-            }
+            return BCrypt.Net.BCrypt.Verify(passwordtext, databaseHash);
         }
 
-        private static string EncryptPassword(string password)
+
+        public static string SecurePassword(string passwordtext)
         {
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-                StringBuilder builder = new StringBuilder();
-                foreach (byte b in bytes)
-                {
-                    builder.Append(b.ToString("x2"));
-                }
-                return builder.ToString();
-            }
+            return BCrypt.Net.BCrypt.HashPassword(passwordtext);
         }
     }
 }

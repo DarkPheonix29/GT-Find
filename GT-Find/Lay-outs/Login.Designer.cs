@@ -92,6 +92,7 @@
             passlogtxt.ForeColor = SystemColors.WindowText;
             passlogtxt.Location = new Point(600, 551);
             passlogtxt.Name = "passlogtxt";
+            passlogtxt.PasswordChar = '*';
             passlogtxt.Size = new Size(362, 43);
             passlogtxt.TabIndex = 13;
             // 
