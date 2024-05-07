@@ -42,5 +42,28 @@ namespace DAL
                 return hashedPassword;
             }
         }
+
+        public bool CreateAccount(string email, string hashedPassword, string username)
+        {
+            try
+            {
+                using (MySqlConnection connection = ConnectionString.GetConnection())
+                {
+                    connection.Open();
+                    string query = "INSERT INTO account (Email, Password, Username) VALUES (@Email, @Password, @Username)";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", hashedPassword);
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating account: {ex.Message}");
+                return false;
+            }
+        }
     }
 }

@@ -19,5 +19,11 @@ namespace BLL
             var result = data.RetrievePass(username);
             return result;
         }
+
+        public bool CreateAccount(string email, string hashedPassword, string username)
+        {
+            var results = data.CreateAccount(email, hashedPassword, username);
+            return results;
+        }
     }
 }

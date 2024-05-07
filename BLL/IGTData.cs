@@ -9,5 +9,7 @@ namespace BLL
     public interface IGTData
     {
         string RetrievePass(string username);
+
+        bool CreateAccount(string email, string hashedPassword, string username);
     }
 }

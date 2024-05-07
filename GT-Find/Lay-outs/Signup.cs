@@ -1,4 +1,5 @@
 ﻿using BLL;
+using DAL;
 using GT_Find.Lay_outs;
 using MySql.Data.MySqlClient;
 using System;
@@ -10,14 +11,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace GT_Find
 {
     public partial class Signup : Form
     {
+        private readonly GTService gtService;
         public Signup()
         {
             InitializeComponent();
+            this.gtService = new GTService(new GTData());
         }
 
         private void Signup_Load(object sender, EventArgs e)
@@ -33,35 +37,31 @@ namespace GT_Find
             if (passwordtext != passwordconfirm)
             {
                 MessageBox.Show("Passwords do not match. Please re-enter your password.");
-                return; 
+                return;
             }
 
-            string server = "studmysql01.fhict.local";
-            string uid = "dbi540357";
-            string password = "Kealan2002";
-            string database = "dbi540357";
-            string constring = "server=" + server + ";uid=" + uid + ";database=" + database + ";pwd=" + password + ";";
+            string email = emailsutext.Text;
+            string username = usersutext.Text;
 
+            // Hash password
+            string hashedPassword = AuthManager.SecurePassword(passwordtext);
 
-            passwordtext = AuthManager.SecurePassword(passwordtext);
+            // Call GTData method to create account
+            bool accountCreated = gtService.CreateAccount(email, hashedPassword, username);
 
-
-            MySqlConnection con = new MySqlConnection(constring);
-            con.Open();
-            string query = "insert into account (Email, Password, Username) values('"+ emailsutext.Text+"','"+passwordtext+"','"+usersutext.Text+"')";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            int i = cmd.ExecuteNonQuery();
-            if (i > -1) 
+            if (accountCreated)
             {
                 MessageBox.Show("Account Created!");
 
+                // Open login form
                 Login login = new Login();
-
                 login.Show();
-
                 this.Hide();
             }
-
+            else
+            {
+                MessageBox.Show("Failed to create account. Please try again later.");
+            }
         }
     }
 }
