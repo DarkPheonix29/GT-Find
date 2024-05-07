@@ -1,4 +1,4 @@
-﻿using DAL;
+﻿
 
 namespace BLL.Models
 {
@@ -12,10 +12,5 @@ namespace BLL.Models
         public int Communication { get; set; }
         public int Dedication { get; set; }
         List<String> Games { get; set; }
-
-        public void GetUserStats() 
-        {
-            
-        }
     }
 }

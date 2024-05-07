@@ -1,11 +1,9 @@
-﻿using DAL;
-using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Data;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace BLL
+namespace DAL
 {
     public class AuthManager
     {

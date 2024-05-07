@@ -17,9 +17,12 @@ namespace GT_Find
 {
     public partial class Login : Form
     {
+        private readonly GTService gtService; // Declare GTService instance
+
         public Login()
         {
             InitializeComponent();
+            this.gtService = new GTService(new GTData()); // Initialize GTService instance
         }
 
         private void gotohomepage(object sender, EventArgs e)
@@ -27,23 +30,17 @@ namespace GT_Find
             string username = userlogtext.Text;
             string password = passlogtxt.Text;
 
+            string hashedPasswordFromDatabase = gtService.RetrievePass(username); // Call RetrievePass method through gtService
 
-            string hashedPasswordFromDatabase = RetrievePass(username);
-
- 
             if (!string.IsNullOrEmpty(hashedPasswordFromDatabase))
             {
-
                 if (AuthManager.ValidateUser(password, hashedPasswordFromDatabase))
                 {
                     MessageBox.Show("Login successful!");
 
                     Home home = new Home();
-
                     home.Show();
-
                     this.Hide();
-
                 }
                 else
                 {
@@ -56,44 +53,9 @@ namespace GT_Find
             }
         }
 
-        private string RetrievePass(string username)
-        {
-            {
-                string hashedPassword = null;
-
-                using (MySqlConnection connection = ConnectionString.GetConnection())
-                {
-                    try
-                    {
-                        connection.Open();
-                        string query = "SELECT Password FROM account WHERE Username = @Username";
-                        MySqlCommand command = new MySqlCommand(query, connection);
-                        command.Parameters.AddWithValue("@Username", username);
-
-                        using (MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-
-                                hashedPassword = reader.GetString("Password");
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error retrieving hashed password: {ex.Message}");
-                    }
-                }
-
-                return hashedPassword;
-            }
-        }
-
         private void emailtext_TextChanged(object sender, EventArgs e)
         {
-
+            // Whatever you want to do when email text changes
         }
-
-
     }
 }
