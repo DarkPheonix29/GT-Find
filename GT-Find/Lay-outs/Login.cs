@@ -1,4 +1,5 @@
 ﻿using BLL;
+using BLL.Models;
 using DAL;
 using GT_Find.Lay_outs;
 
@@ -36,6 +37,10 @@ namespace GT_Find
             {
                 if (AuthManager.ValidateUser(password, hashedPasswordFromDatabase))
                 {
+                    // Set the username and user ID in the User class
+                    User.Username = username;
+                    User.UserId = gtService.RetrieveUserId(username);
+
                     MessageBox.Show("Login successful!");
 
                     Home home = new Home();

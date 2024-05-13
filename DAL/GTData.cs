@@ -76,7 +76,7 @@ namespace DAL
                 using (MySqlConnection connection = ConnectionString.GetConnection())
                 {
                     connection.Open();
-                    string query = "INSERT INTO Profile (UserID, Bio, Region, Country, Platform, Fun, Cop, Serious, Communication, Dedication) VALUES (@UserID, @Bio, @Region, @Country, @Platform, @Fun, @Cop, @Serious, @Communication, @Dedication)";
+                    string query = "INSERT INTO Profile (UserID, Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication) VALUES (@UserID, @Bio, @Region, @Country, @Platform, @Fun, @Competitive, @Serious, @Communication, @Dedication)";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@UserID", userId);
                     cmd.Parameters.AddWithValue("@Bio", bio);
@@ -84,7 +84,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@Country", country);
                     cmd.Parameters.AddWithValue("@Platform", platform);
                     cmd.Parameters.AddWithValue("@Fun", funValue);
-                    cmd.Parameters.AddWithValue("@Cop", copValue);
+                    cmd.Parameters.AddWithValue("@Competitive", copValue);
                     cmd.Parameters.AddWithValue("@Serious", srsValue);
                     cmd.Parameters.AddWithValue("@Communication", comValue);
                     cmd.Parameters.AddWithValue("@Dedication", dedValue);

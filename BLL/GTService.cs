@@ -32,5 +32,11 @@ namespace BLL
             var results = data.SaveProfile(userId, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
             return results;
         }
+
+        public int RetrieveUserId(string username)
+        {
+            var results = data.RetrieveUserId(username);
+            return results;
+        }
     }
 }

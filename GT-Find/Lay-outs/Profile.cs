@@ -88,8 +88,49 @@ namespace GT_Find.Lay_outs
             foreach (CheckBox checkBox in Controls.OfType<CheckBox>())
             {
                 checkBox.CheckedChanged += checkBox_CheckedChanged;
+
+                // Assign the specific event handler based on the checkbox name
+                switch (checkBox.Name)
+                {
+                    case "fun1":
+                    case "fun2":
+                    case "fun3":
+                    case "fun4":
+                    case "fun5":
+                        checkBox.CheckedChanged += fun_CheckedChanged;
+                        break;
+                    case "cop1":
+                    case "cop2":
+                    case "cop3":
+                    case "cop4":
+                    case "cop5":
+                        checkBox.CheckedChanged += cop_CheckedChanged;
+                        break;
+                    case "srs1":
+                    case "srs2":
+                    case "srs3":
+                    case "srs4":
+                    case "srs5":
+                        checkBox.CheckedChanged += srs_CheckedChanged;
+                        break;
+                    case "com1":
+                    case "com2":
+                    case "com3":
+                    case "com4":
+                    case "com5":
+                        checkBox.CheckedChanged += com_CheckedChanged;
+                        break;
+                    case "ded1":
+                    case "ded2":
+                    case "ded3":
+                    case "ded4":
+                    case "ded5":
+                        checkBox.CheckedChanged += ded_CheckedChanged;
+                        break;
+                }
             }
         }
+
 
         private void UncheckOtherCheckboxes(CheckBox clickedCheckbox)
         {
