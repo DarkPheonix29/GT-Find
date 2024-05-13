@@ -1,7 +1,7 @@
 ﻿using BLL;
 using DAL;
 using GT_Find.Lay_outs;
-using MySql.Data.MySqlClient;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,16 +1,8 @@
-﻿
-
-namespace BLL.Models
+﻿namespace BLL.Models
 {
-    public class User
+    public static class User
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public int Fun { get; set; }
-        public int Competitive { get; set; }
-        public int Serious { get; set; }
-        public int Communication { get; set; }
-        public int Dedication { get; set; }
-        List<String> Games { get; set; }
+        public static string Username { get; set; }
+        public static int UserId { get; set; }
     }
 }
