@@ -31,7 +31,7 @@ namespace GT_Find.Lay_outs
             countrytxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             regiontxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             platformtxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            this.gtService = new GTService(new GTData());
+            this.gtService = new GTService(new GTData_Account(), new GTData_Profile());
 
             // Attach event handlers to checkbox changed events
             AttachCheckboxEventHandlers();
