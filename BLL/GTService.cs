@@ -40,5 +40,11 @@ namespace BLL
             var results = accountdata.RetrieveUserId(username);
             return results;
         }
+
+        public ProfileInfo RetrieveProfile(int userId)
+        {
+            var results = profiledata.RetrieveProfile(userId);
+            return results;
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace GT_Find
         public Signup()
         {
             InitializeComponent();
-            this.gtService = new GTService(new GTData());
+            this.gtService = new GTService(new GTData_Account(), new GTData_Profile());
         }
 
         private void Signup_Load(object sender, EventArgs e)

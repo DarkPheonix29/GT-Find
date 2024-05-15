@@ -36,7 +36,7 @@
             findlbl = new Label();
             homelbl = new Label();
             pictureBox2 = new PictureBox();
-            boitext = new TextBox();
+            biotext = new TextBox();
             regiontxt = new TextBox();
             countrytxt = new TextBox();
             platformtxt = new TextBox();
@@ -159,15 +159,15 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += openmenu;
             // 
-            // boitext
+            // biotext
             // 
-            boitext.BorderStyle = BorderStyle.FixedSingle;
-            boitext.Location = new Point(10, 266);
-            boitext.Margin = new Padding(3, 2, 3, 2);
-            boitext.Multiline = true;
-            boitext.Name = "boitext";
-            boitext.Size = new Size(628, 94);
-            boitext.TabIndex = 23;
+            biotext.BorderStyle = BorderStyle.FixedSingle;
+            biotext.Location = new Point(10, 266);
+            biotext.Margin = new Padding(3, 2, 3, 2);
+            biotext.Multiline = true;
+            biotext.Name = "biotext";
+            biotext.Size = new Size(628, 94);
+            biotext.TabIndex = 23;
             // 
             // regiontxt
             // 
@@ -647,7 +647,7 @@
             Controls.Add(platformtxt);
             Controls.Add(countrytxt);
             Controls.Add(regiontxt);
-            Controls.Add(boitext);
+            Controls.Add(biotext);
             Controls.Add(profilelbl);
             Controls.Add(findlbl);
             Controls.Add(homelbl);
@@ -675,7 +675,7 @@
         private Label findlbl;
         private Label homelbl;
         private PictureBox pictureBox2;
-        private TextBox boitext;
+        private TextBox biotext;
         private TextBox platformtxt;
         private TextBox textBox3;
         private TextBox regiontxt;

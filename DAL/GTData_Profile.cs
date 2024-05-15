@@ -44,5 +44,44 @@ namespace DAL
                 return false;
             }
         }
+
+        public ProfileInfo RetrieveProfile(int userId)
+        {
+            ProfileInfo profileInfo = new ProfileInfo();
+
+            try
+            {
+                using (MySqlConnection connection = ConnectionString.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication FROM Profile WHERE UserID = @UserID";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@UserID", userId);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            profileInfo.Bio = reader.GetString("Bio");
+                            profileInfo.Region = reader.GetString("Region");
+                            profileInfo.Country = reader.GetString("Country");
+                            profileInfo.Platform = reader.GetString("Platform");
+                            profileInfo.Fun = reader.GetInt32("Fun");
+                            profileInfo.Competitive = reader.GetInt32("Competitive");
+                            profileInfo.Serious = reader.GetInt32("Serious");
+                            profileInfo.Communication = reader.GetInt32("Communication");
+                            profileInfo.Dedication = reader.GetInt32("Dedication");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occurred while retrieving profile: {ex.Message}");
+            }
+
+            return profileInfo;
+        }
+
     }
 }

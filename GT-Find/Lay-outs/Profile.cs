@@ -32,7 +32,7 @@ namespace GT_Find.Lay_outs
             regiontxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             platformtxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             this.gtService = new GTService(new GTData_Account(), new GTData_Profile());
-
+            this.Load += Profile_Load;
             // Attach event handlers to checkbox changed events
             AttachCheckboxEventHandlers();
         }
@@ -42,6 +42,7 @@ namespace GT_Find.Lay_outs
             homelbl.Visible = false;
             findlbl.Visible = false;
             profilelbl.Visible = false;
+            LoadUserProfile(User.UserId);
         }
 
         private void openmenu(object sender, EventArgs e)
@@ -148,7 +149,7 @@ namespace GT_Find.Lay_outs
         {
             string username = User.Username;
             int userId = User.UserId;
-            string bio = boitext.Text;
+            string bio = biotext.Text;
             string region = regiontxt.Text;
             string country = countrytxt.Text;
             string platform = platformtxt.Text;
@@ -218,6 +219,41 @@ namespace GT_Find.Lay_outs
             {
                 // If not checked, return 0 as the default value
                 return 0;
+            }
+        }
+
+        private void LoadUserProfile(int userId)
+        {
+            // Retrieve profile information for the logged-in user
+            ProfileInfo profileInfo = gtService.RetrieveProfile(userId);
+
+            biotext.Text = profileInfo.Bio;
+            regiontxt.Text = profileInfo.Region;
+            countrytxt.Text = profileInfo.Country;
+            platformtxt.Text = profileInfo.Region;
+
+            funValue = profileInfo.Fun;
+            copValue = profileInfo.Competitive;
+            srsValue = profileInfo.Serious;
+            comValue = profileInfo.Communication;
+            dedValue = profileInfo.Dedication;
+
+            SetCheckboxStates(funValue, "fun");
+            SetCheckboxStates(copValue, "cop");
+            SetCheckboxStates(srsValue, "srs");
+            SetCheckboxStates(comValue, "com");
+            SetCheckboxStates(dedValue, "ded");
+        }
+
+        private void SetCheckboxStates(int value, string category)
+        {
+            foreach (CheckBox checkBox in Controls.OfType<CheckBox>())
+            {
+                if (checkBox.Tag?.ToString() == category)
+                {
+                    int index = int.Parse(checkBox.Name.Substring(category.Length)); // Extract the index from the checkbox name
+                    checkBox.Checked = index == value; // Check if the index matches the value from the database
+                }
             }
         }
     }
