@@ -18,24 +18,55 @@ namespace DAL
                 using (MySqlConnection connection = ConnectionString.GetConnection())
                 {
                     connection.Open();
-                    string query = "INSERT INTO Profile (UserID, Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication) VALUES (@UserID, @Bio, @Region, @Country, @Platform, @Fun, @Competitive, @Serious, @Communication, @Dedication)";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@UserID", userId);
-                    cmd.Parameters.AddWithValue("@Bio", bio);
-                    cmd.Parameters.AddWithValue("@Region", region);
-                    cmd.Parameters.AddWithValue("@Country", country);
-                    cmd.Parameters.AddWithValue("@Platform", platform);
-                    cmd.Parameters.AddWithValue("@Fun", funValue);
-                    cmd.Parameters.AddWithValue("@Competitive", copValue);
-                    cmd.Parameters.AddWithValue("@Serious", srsValue);
-                    cmd.Parameters.AddWithValue("@Communication", comValue);
-                    cmd.Parameters.AddWithValue("@Dedication", dedValue);
 
-                    // Log the filled-in SQL query
-                    Debug.WriteLine("Executing SQL query: " + cmd.CommandText);
+                    // Check if a profile for the given user ID already exists
+                    string checkQuery = "SELECT COUNT(*) FROM Profile WHERE UserID = @UserID";
+                    MySqlCommand checkCmd = new MySqlCommand(checkQuery, connection);
+                    checkCmd.Parameters.AddWithValue("@UserID", userId);
+                    int profileCount = Convert.ToInt32(checkCmd.ExecuteScalar());
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                    if (profileCount > 0)
+                    {
+                        // Profile exists, so update it
+                        string updateQuery = "UPDATE Profile SET Bio = @Bio, Region = @Region, Country = @Country, Platform = @Platform, Fun = @Fun, Competitive = @Competitive, Serious = @Serious, Communication = @Communication, Dedication = @Dedication WHERE UserID = @UserID";
+                        MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection);
+                        updateCmd.Parameters.AddWithValue("@UserID", userId);
+                        updateCmd.Parameters.AddWithValue("@Bio", bio);
+                        updateCmd.Parameters.AddWithValue("@Region", region);
+                        updateCmd.Parameters.AddWithValue("@Country", country);
+                        updateCmd.Parameters.AddWithValue("@Platform", platform);
+                        updateCmd.Parameters.AddWithValue("@Fun", funValue);
+                        updateCmd.Parameters.AddWithValue("@Competitive", copValue);
+                        updateCmd.Parameters.AddWithValue("@Serious", srsValue);
+                        updateCmd.Parameters.AddWithValue("@Communication", comValue);
+                        updateCmd.Parameters.AddWithValue("@Dedication", dedValue);
+
+                        Debug.WriteLine("Executing SQL query: " + updateCmd.CommandText);
+
+                        int rowsAffected = updateCmd.ExecuteNonQuery();
+                        return rowsAffected > 0;
+                    }
+                    else
+                    {
+                        // Profile doesn't exist, so insert a new one
+                        string insertQuery = "INSERT INTO Profile (UserID, Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication) VALUES (@UserID, @Bio, @Region, @Country, @Platform, @Fun, @Competitive, @Serious, @Communication, @Dedication)";
+                        MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection);
+                        insertCmd.Parameters.AddWithValue("@UserID", userId);
+                        insertCmd.Parameters.AddWithValue("@Bio", bio);
+                        insertCmd.Parameters.AddWithValue("@Region", region);
+                        insertCmd.Parameters.AddWithValue("@Country", country);
+                        insertCmd.Parameters.AddWithValue("@Platform", platform);
+                        insertCmd.Parameters.AddWithValue("@Fun", funValue);
+                        insertCmd.Parameters.AddWithValue("@Competitive", copValue);
+                        insertCmd.Parameters.AddWithValue("@Serious", srsValue);
+                        insertCmd.Parameters.AddWithValue("@Communication", comValue);
+                        insertCmd.Parameters.AddWithValue("@Dedication", dedValue);
+
+                        Debug.WriteLine("Executing SQL query: " + insertCmd.CommandText);
+
+                        int rowsAffected = insertCmd.ExecuteNonQuery();
+                        return rowsAffected > 0;
+                    }
                 }
             }
             catch (Exception ex)
@@ -44,6 +75,7 @@ namespace DAL
                 return false;
             }
         }
+
 
         public ProfileInfo RetrieveProfile(int userId)
         {
