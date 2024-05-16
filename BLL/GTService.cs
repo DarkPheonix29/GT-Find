@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using BLL.IGTData;
 
 namespace BLL
 {
@@ -11,10 +12,12 @@ namespace BLL
     {
         private readonly IGTAccountData accountdata;
         private readonly IGTProfileData profiledata;
-        public GTService(IGTAccountData accountdata, IGTProfileData profiledata)
+        private readonly IGTGamesData gamedata;
+        public GTService(IGTAccountData accountdata, IGTProfileData profiledata, IGTGamesData gamedata)
         {
             this.accountdata = accountdata;
             this.profiledata = profiledata;
+            this.gamedata = gamedata;
         }
 
         public string RetrievePass(string username)
@@ -44,6 +47,18 @@ namespace BLL
         public ProfileInfo RetrieveProfile(int userId)
         {
             var results = profiledata.RetrieveProfile(userId);
+            return results;
+        }
+
+        public List<string> RetrieveGames()
+        {
+            var results = gamedata.RetrieveGames();
+            return results;
+        }
+
+        public bool SaveUserGames(int userId, List<string> selectedGames)
+        {
+            var results = gamedata.SaveUserGames(userId, selectedGames);
             return results;
         }
     }

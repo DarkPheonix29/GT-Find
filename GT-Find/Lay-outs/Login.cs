@@ -23,7 +23,7 @@ namespace GT_Find
         public Login()
         {
             InitializeComponent();
-            this.gtService = new GTService(new GTData_Account(), new GTData_Profile()); // Initialize GTService instance
+            this.gtService = new GTService(new GTData_Account(), new GTData_Profile(), new GTData_Games()); // Initialize GTService instance
         }
 
         private void gotohomepage(object sender, EventArgs e)

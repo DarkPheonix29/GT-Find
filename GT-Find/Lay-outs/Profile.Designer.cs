@@ -75,6 +75,8 @@
             label9 = new Label();
             label10 = new Label();
             saveprofilebtn = new Button();
+            GameBox = new ListBox();
+            label11 = new Label();
             ((System.ComponentModel.ISupportInitialize)Logo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -603,12 +605,36 @@
             saveprofilebtn.UseVisualStyleBackColor = false;
             saveprofilebtn.Click += SaveProfileButton_Click;
             // 
+            // GameBox
+            // 
+            GameBox.FormattingEnabled = true;
+            GameBox.ItemHeight = 15;
+            GameBox.Location = new Point(259, 467);
+            GameBox.Name = "GameBox";
+            GameBox.SelectionMode = SelectionMode.MultiSimple;
+            GameBox.Size = new Size(167, 124);
+            GameBox.TabIndex = 64;
+            GameBox.SelectedIndexChanged += GameBox_SelectedIndexChanged;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Impact", 12.2F);
+            label11.Location = new Point(259, 443);
+            label11.Name = "label11";
+            label11.Size = new Size(58, 21);
+            label11.TabIndex = 65;
+            label11.Text = "Games";
+            label11.Click += label11_Click;
+            // 
             // Profile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1340, 696);
+            Controls.Add(label11);
+            Controls.Add(GameBox);
             Controls.Add(saveprofilebtn);
             Controls.Add(label10);
             Controls.Add(label9);
@@ -715,5 +741,7 @@
         private Label label9;
         private Label label10;
         private Button saveprofilebtn;
+        private ListBox GameBox;
+        private Label label11;
     }
 }

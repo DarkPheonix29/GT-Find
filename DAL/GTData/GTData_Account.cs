@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BLL;
 using BLL.Models;
 using System.Diagnostics;
 using System.Data;
+using BLL.IGTData;
 
 namespace DAL
 {

@@ -18,7 +18,7 @@ namespace GT_Find.Lay_outs
     {
         private readonly GTService gtService;
 
-        // Define variables to hold checkbox values
+
         private int funValue = 0;
         private int copValue = 0;
         private int srsValue = 0;
@@ -31,9 +31,9 @@ namespace GT_Find.Lay_outs
             countrytxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             regiontxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             platformtxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            this.gtService = new GTService(new GTData_Account(), new GTData_Profile());
+            this.gtService = new GTService(new GTData_Account(), new GTData_Profile(), new GTData_Games());
             this.Load += Profile_Load;
-            // Attach event handlers to checkbox changed events
+         
             AttachCheckboxEventHandlers();
         }
 
@@ -43,6 +43,8 @@ namespace GT_Find.Lay_outs
             findlbl.Visible = false;
             profilelbl.Visible = false;
             LoadUserProfile(User.UserId);
+            LoadGames();
+
         }
 
         private void openmenu(object sender, EventArgs e)
@@ -77,7 +79,7 @@ namespace GT_Find.Lay_outs
 
         private void AttachCheckboxEventHandlers()
         {
-            // Define the event handler method
+     
             EventHandler checkBox_CheckedChanged = (sender, e) =>
             {
                 CheckBox clickedCheckbox = (CheckBox)sender;
@@ -85,12 +87,12 @@ namespace GT_Find.Lay_outs
                 UncheckOtherCheckboxes(clickedCheckbox);
             };
 
-            // Attach the event handler to all checkboxes
+     
             foreach (CheckBox checkBox in Controls.OfType<CheckBox>())
             {
                 checkBox.CheckedChanged += checkBox_CheckedChanged;
 
-                // Assign the specific event handler based on the checkbox name
+          
                 switch (checkBox.Name)
                 {
                     case "fun1":
@@ -135,7 +137,7 @@ namespace GT_Find.Lay_outs
 
         private void UncheckOtherCheckboxes(CheckBox clickedCheckbox)
         {
-            // Uncheck other checkboxes in the same group
+      
             foreach (CheckBox checkBox in Controls.OfType<CheckBox>())
             {
                 if (checkBox != clickedCheckbox && checkBox.Tag == clickedCheckbox.Tag)
@@ -154,14 +156,26 @@ namespace GT_Find.Lay_outs
             string country = countrytxt.Text;
             string platform = platformtxt.Text;
 
-            // Pass checkbox values directly to the service method
+            List<string> selectedGames = GetSelectedGames();
+
+
             try
             {
                 bool success = gtService.SaveProfile(userId, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
 
                 if (success)
                 {
-                    MessageBox.Show("Profile saved successfully!");
+
+                    success = SaveGames(selectedGames);
+
+                    if (success)
+                    {
+                        MessageBox.Show("Profile saved successfully!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to save selected games!");
+                    }
                 }
                 else
                 {
@@ -174,7 +188,56 @@ namespace GT_Find.Lay_outs
             }
         }
 
-        // Event handlers for checkbox changes
+
+        private List<string> GetSelectedGames()
+        {
+            List<string> selectedGames = new List<string>();
+
+
+            foreach (var selectedItem in GameBox.SelectedItems)
+            {
+                selectedGames.Add(selectedItem.ToString());
+            }
+
+            return selectedGames;
+        }
+
+        private bool SaveGames(List<string> selectedGames)
+        {
+            int userId = User.UserId;
+
+            try
+            {
+                // Log the selected games
+                Debug.WriteLine("Selected Games:");
+                foreach (var game in selectedGames)
+                {
+                    Debug.WriteLine(game);
+                }
+
+                // Attempt to save the selected games
+                bool success = gtService.SaveUserGames(userId, selectedGames);
+
+                if (success)
+                {
+                    Debug.WriteLine("User games saved successfully.");
+                }
+                else
+                {
+                    Debug.WriteLine("Failed to save user games.");
+                }
+
+                return success;
+            }
+            catch (Exception ex)
+            {
+                // Log any exceptions that occur
+                Debug.WriteLine($"An error occurred while saving user games: {ex.Message}");
+                return false;
+            }
+        }
+
+
         private void fun_CheckedChanged(object sender, EventArgs e)
         {
             funValue = GetCheckboxValue(sender);
@@ -202,29 +265,29 @@ namespace GT_Find.Lay_outs
 
         private int GetCheckboxValue(object sender)
         {
-            // Cast the sender object to a CheckBox type
+
             CheckBox checkBox = (CheckBox)sender;
 
-            // Get the category from the checkbox name (e.g., "fun1", "cop2", etc.)
-            string categoryName = checkBox.Name.Substring(0, 3); // Extract the first three characters
-            int value = int.Parse(checkBox.Name.Substring(3)); // Extract the remaining characters as the value
 
-            // Check if the checkbox is checked
+            string categoryName = checkBox.Name.Substring(0, 3); 
+            int value = int.Parse(checkBox.Name.Substring(3)); 
+
+
             if (checkBox.Checked)
             {
-                // If checked, return the value
+
                 return value;
             }
             else
             {
-                // If not checked, return 0 as the default value
+
                 return 0;
             }
         }
 
         private void LoadUserProfile(int userId)
         {
-            // Retrieve profile information for the logged-in user
+
             ProfileInfo profileInfo = gtService.RetrieveProfile(userId);
 
             biotext.Text = profileInfo.Bio;
@@ -251,10 +314,41 @@ namespace GT_Find.Lay_outs
             {
                 if (checkBox.Tag?.ToString() == category)
                 {
-                    int index = int.Parse(checkBox.Name.Substring(category.Length)); // Extract the index from the checkbox name
-                    checkBox.Checked = index == value; // Check if the index matches the value from the database
+                    int index = int.Parse(checkBox.Name.Substring(category.Length)); 
+                    checkBox.Checked = index == value; 
                 }
             }
+        }
+
+        private void LoadGames()
+        {
+
+            List<string> games = gtService.RetrieveGames();
+
+
+           GameBox.Items.Clear();
+
+
+            foreach (string game in games)
+            {
+                GameBox.Items.Add(game);
+            }
+        }
+
+        private void GameBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Check if any item is selected
+            if (GameBox.SelectedItem != null)
+            {
+                // Display a message box with the selected game's name
+                MessageBox.Show($"Selected Game: {GameBox.SelectedItem.ToString()}", "Game Selected");
+            }
+        }
+
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
