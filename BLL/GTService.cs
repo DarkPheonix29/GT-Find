@@ -32,9 +32,9 @@ namespace BLL
             return results;
         }
 
-        public bool SaveProfile(int userId, string bio, string region, string country, string platform, int funValue, int copValue, int srsValue, int comValue, int dedValue)
+        public bool SaveProfile(int userId, string username, string bio, string region, string country, string platform, int funValue, int copValue, int srsValue, int comValue, int dedValue)
         {
-            var results = profiledata.SaveProfile(userId, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
+            var results = profiledata.SaveProfile(userId, username, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
             return results;
         }
 
@@ -59,6 +59,12 @@ namespace BLL
         public bool SaveUserGames(int userId, List<string> selectedGames)
         {
             var results = gamedata.SaveUserGames(userId, selectedGames);
+            return results;
+        }
+
+        public List<ProfileInfo> GetAllProfiles()
+        {
+            var results = profiledata.GetAllProfiles();
             return results;
         }
     }
