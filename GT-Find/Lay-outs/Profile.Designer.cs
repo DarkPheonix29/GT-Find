@@ -614,7 +614,6 @@
             GameBox.SelectionMode = SelectionMode.MultiSimple;
             GameBox.Size = new Size(167, 124);
             GameBox.TabIndex = 64;
-            GameBox.SelectedIndexChanged += GameBox_SelectedIndexChanged;
             // 
             // label11
             // 

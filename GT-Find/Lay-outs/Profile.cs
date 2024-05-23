@@ -335,15 +335,7 @@ namespace GT_Find.Lay_outs
             }
         }
 
-        private void GameBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Check if any item is selected
-            if (GameBox.SelectedItem != null)
-            {
-                // Display a message box with the selected game's name
-                MessageBox.Show($"Selected Game: {GameBox.SelectedItem.ToString()}", "Game Selected");
-            }
-        }
+        
 
 
         private void label11_Click(object sender, EventArgs e)
