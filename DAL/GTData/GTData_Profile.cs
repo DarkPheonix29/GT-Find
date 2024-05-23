@@ -6,12 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.IGTData;
+using BLL.Models;
 
 namespace DAL
 {
     public class GTData_Profile : IGTProfileData
     {
-        public bool SaveProfile(int userId, string bio, string region, string country, string platform, int funValue, int copValue, int srsValue, int comValue, int dedValue)
+        public bool SaveProfile(int userId, string username, string bio, string region, string country, string platform, int funValue, int copValue, int srsValue, int comValue, int dedValue)
         {
             try
             {
@@ -28,9 +29,10 @@ namespace DAL
                     if (profileCount > 0)
                     {
                         // Profile exists, so update it
-                        string updateQuery = "UPDATE Profile SET Bio = @Bio, Region = @Region, Country = @Country, Platform = @Platform, Fun = @Fun, Competitive = @Competitive, Serious = @Serious, Communication = @Communication, Dedication = @Dedication WHERE UserID = @UserID";
+                        string updateQuery = "UPDATE Profile SET Username = @Username, Bio = @Bio, Region = @Region, Country = @Country, Platform = @Platform, Fun = @Fun, Competitive = @Competitive, Serious = @Serious, Communication = @Communication, Dedication = @Dedication WHERE UserID = @UserID";
                         MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection);
                         updateCmd.Parameters.AddWithValue("@UserID", userId);
+                        updateCmd.Parameters.AddWithValue("@Username", User.Username);
                         updateCmd.Parameters.AddWithValue("@Bio", bio);
                         updateCmd.Parameters.AddWithValue("@Region", region);
                         updateCmd.Parameters.AddWithValue("@Country", country);
@@ -49,9 +51,10 @@ namespace DAL
                     else
                     {
                         // Profile doesn't exist, so insert a new one
-                        string insertQuery = "INSERT INTO Profile (UserID, Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication) VALUES (@UserID, @Bio, @Region, @Country, @Platform, @Fun, @Competitive, @Serious, @Communication, @Dedication)";
+                        string insertQuery = "INSERT INTO Profile (UserID, Username, Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication) VALUES (@UserID, @Bio, @Region, @Country, @Platform, @Fun, @Competitive, @Serious, @Communication, @Dedication)";
                         MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection);
                         insertCmd.Parameters.AddWithValue("@UserID", userId);
+                        insertCmd.Parameters.AddWithValue("@Username", User.Username);
                         insertCmd.Parameters.AddWithValue("@Bio", bio);
                         insertCmd.Parameters.AddWithValue("@Region", region);
                         insertCmd.Parameters.AddWithValue("@Country", country);
@@ -113,6 +116,51 @@ namespace DAL
             }
 
             return profileInfo;
+        }
+
+        public List<ProfileInfo> GetAllProfiles()
+        {
+            List<ProfileInfo> profiles = new List<ProfileInfo>();
+
+            try
+            {
+                using (MySqlConnection connection = ConnectionString.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT UserID, Username, Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication FROM Profile";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ProfileInfo profile = new ProfileInfo
+                            {
+                                UserID = reader.GetInt32("UserID"),
+                                Username = reader.GetString("Username"),
+                                Bio = reader.GetString("Bio"),
+                                Region = reader.GetString("Region"),
+                                Country = reader.GetString("Country"),
+                                Platform = reader.GetString("Platform"),
+                                Fun = reader.GetInt32("Fun"),
+                                Competitive = reader.GetInt32("Competitive"),
+                                Serious = reader.GetInt32("Serious"),
+                                Communication = reader.GetInt32("Communication"),
+                                Dedication = reader.GetInt32("Dedication")
+                            };
+
+                            profiles.Add(profile);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error (you can replace this with your preferred logging approach)
+                Console.WriteLine($"An error occurred while retrieving profiles: {ex.Message}");
+            }
+
+            return profiles;
         }
 
     }

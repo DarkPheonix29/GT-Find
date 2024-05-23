@@ -161,7 +161,7 @@ namespace GT_Find.Lay_outs
 
             try
             {
-                bool success = gtService.SaveProfile(userId, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
+                bool success = gtService.SaveProfile(userId, username, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
 
                 if (success)
                 {

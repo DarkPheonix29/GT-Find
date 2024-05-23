@@ -193,7 +193,7 @@
             // 
             // platformtxt
             // 
-            platformtxt.AutoCompleteCustomSource.AddRange(new string[] { "PC", "PlayStation 5", "Nintendo Switch", "Xbox Series X", "Mobile" });
+            platformtxt.AutoCompleteCustomSource.AddRange(new string[] { "PC", "PlayStation", "Nintendo Switch", "Xbox", "Mobile" });
             platformtxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             platformtxt.Location = new Point(10, 565);
             platformtxt.Margin = new Padding(3, 2, 3, 2);
