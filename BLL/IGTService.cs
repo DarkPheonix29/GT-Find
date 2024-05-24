@@ -17,5 +17,6 @@ namespace BLL
         public List<string> RetrieveGames();
         public bool SaveUserGames(int userId, List<string> selectedGames);
         public List<ProfileInfo> GetAllProfiles();
+        bool DeleteProfile(int userId);
     }
 }

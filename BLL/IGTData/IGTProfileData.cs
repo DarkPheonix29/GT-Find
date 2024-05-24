@@ -13,5 +13,7 @@ namespace BLL.IGTData
         ProfileInfo RetrieveProfile(int userId);
 
         List<ProfileInfo> GetAllProfiles();
+
+        bool DeleteProfile(int userId);
     }
 }

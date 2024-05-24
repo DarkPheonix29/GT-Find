@@ -67,5 +67,10 @@ namespace BLL
             var results = profiledata.GetAllProfiles();
             return results;
         }
+
+        public bool DeleteProfile(int userId)
+        {
+            return profiledata.DeleteProfile(userId);
+        }
     }
 }
