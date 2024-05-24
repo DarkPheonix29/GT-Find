@@ -74,5 +74,10 @@ namespace BLL
             var results = gamedata.GetUserGames(userId);
             return results;
         }
+        public bool DeleteProfile(int userId)
+        {
+            var results = profiledata.DeleteProfile(userId);
+            return results;
+        }
     }
 }
