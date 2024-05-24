@@ -8,7 +8,7 @@ using BLL.IGTData;
 
 namespace BLL
 {
-    public class GTService
+    public class GTService : IGTService
     {
         private readonly IGTAccountData accountdata;
         private readonly IGTProfileData profiledata;

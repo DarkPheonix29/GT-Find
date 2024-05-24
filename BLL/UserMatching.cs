@@ -7,7 +7,7 @@ namespace BLL
 {
     public class UserMatching
     {
-        private readonly GTService _gtService;
+        private readonly IGTService _gtService;
 
         private Dictionary<string, double> PreferenceWeights = new Dictionary<string, double>
         {
@@ -18,7 +18,7 @@ namespace BLL
             { "Dedication", 0.2 }
         };
 
-        public UserMatching(GTService gtService)
+        public UserMatching(IGTService gtService)
         {
             _gtService = gtService;
         }
