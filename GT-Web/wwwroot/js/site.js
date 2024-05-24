@@ -1,4 +1,10 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener("DOMContentLoaded", function () {
+    var menuToggle = document.querySelector(".navbar-toggler");
+    var menuItems = document.querySelectorAll(".menu-item");
 
-// Write your JavaScript code.
+    menuToggle.addEventListener("click", function () {
+        menuItems.forEach(function (item) {
+            item.classList.toggle("visible");
+        });
+    });
+});

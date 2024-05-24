@@ -1,0 +1,41 @@
+﻿@model List<BLL.Models.ProfileInfo>
+
+@{
+    ViewData["Title"] = "Find";
+}
+
+<div class="text-center">
+    <h1 class="title">Find</h1>
+</div>
+
+<div class="profile-list">
+    @foreach (var profile in Model)
+    {
+        <div class="profile-box">
+            <h2>@profile.Username</h2>
+            <p>@profile.Bio</p>
+            <p>@profile.Region</p>
+            <p>@profile.Country</p>
+            <p>@profile.Platform</p>
+        </div>
+    }
+</div>
+
+<style>
+    .profile-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+    }
+
+    .profile-box {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        width: 300px;
+    }
+</style>

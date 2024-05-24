@@ -10,6 +10,5 @@ namespace BLL.Models
     {
         public int GameID { get; set; }
         public string GameName { get; set; }
-        // Add other properties as needed
     }
 }

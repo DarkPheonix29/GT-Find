@@ -1,0 +1,43 @@
+.login-container, .signup-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.title {
+    color: #f08c00;
+    font-weight: bold;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.btn-primary {
+    background-color: #f08c00;
+    border-color: #f08c00;
+}
+
+body {
+    background-color: white;
+    background-image: url('../Image/background-pattern.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    font-family: Impact, sans-serif;
+}

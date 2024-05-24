@@ -32,7 +32,7 @@ namespace DAL
                         string updateQuery = "UPDATE Profile SET Username = @Username, Bio = @Bio, Region = @Region, Country = @Country, Platform = @Platform, Fun = @Fun, Competitive = @Competitive, Serious = @Serious, Communication = @Communication, Dedication = @Dedication WHERE UserID = @UserID";
                         MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection);
                         updateCmd.Parameters.AddWithValue("@UserID", userId);
-                        updateCmd.Parameters.AddWithValue("@Username", User.Username);
+                        updateCmd.Parameters.AddWithValue("@Username", username);
                         updateCmd.Parameters.AddWithValue("@Bio", bio);
                         updateCmd.Parameters.AddWithValue("@Region", region);
                         updateCmd.Parameters.AddWithValue("@Country", country);
@@ -51,10 +51,10 @@ namespace DAL
                     else
                     {
                         // Profile doesn't exist, so insert a new one
-                        string insertQuery = "INSERT INTO Profile (UserID, Username, Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication) VALUES (@UserID, @Bio, @Region, @Country, @Platform, @Fun, @Competitive, @Serious, @Communication, @Dedication)";
+                        string insertQuery = "INSERT INTO Profile (UserID, Username, Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication) VALUES (@UserID, @Username, @Bio, @Region, @Country, @Platform, @Fun, @Competitive, @Serious, @Communication, @Dedication)";
                         MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection);
                         insertCmd.Parameters.AddWithValue("@UserID", userId);
-                        insertCmd.Parameters.AddWithValue("@Username", User.Username);
+                        insertCmd.Parameters.AddWithValue("@Username", username);
                         insertCmd.Parameters.AddWithValue("@Bio", bio);
                         insertCmd.Parameters.AddWithValue("@Region", region);
                         insertCmd.Parameters.AddWithValue("@Country", country);
@@ -80,6 +80,7 @@ namespace DAL
         }
 
 
+
         public ProfileInfo RetrieveProfile(int userId)
         {
             ProfileInfo profileInfo = new ProfileInfo();
@@ -97,6 +98,7 @@ namespace DAL
                     {
                         if (reader.Read())
                         {
+                            profileInfo.UserID = userId; // Ensure UserID is set
                             profileInfo.Bio = reader.GetString("Bio");
                             profileInfo.Region = reader.GetString("Region");
                             profileInfo.Country = reader.GetString("Country");
@@ -117,6 +119,7 @@ namespace DAL
 
             return profileInfo;
         }
+
 
         public List<ProfileInfo> GetAllProfiles()
         {

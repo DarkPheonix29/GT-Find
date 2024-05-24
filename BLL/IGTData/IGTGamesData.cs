@@ -11,5 +11,7 @@ namespace BLL.IGTData
         public List<string> RetrieveGames();
 
         public bool SaveUserGames(int userId, List<string> selectedGames);
+
+        List<string> GetUserGames(int userId);
     }
 }

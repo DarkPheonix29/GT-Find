@@ -1,0 +1,104 @@
+body {
+    font-family: Impact, sans-serif;
+    text-transform: none;
+    font-style: normal;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    background-color: white;
+}
+
+.home-container, .find-container, .profile-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.title {
+    color: #f08c00;
+    font-weight: bold;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.menu-item {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.username {
+    font-weight: bold;
+    color: #f08c00;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 80%;
+    text-align: left;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #f08c00;
+    border-color: #f08c00;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .btn-primary:hover {
+        background-color: #d07a00;
+        border-color: #d07a00;
+    }
+
+.profiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.profile-box {
+    background-color: #efefef;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: left;
+}
+
+.preferences {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

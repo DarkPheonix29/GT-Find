@@ -1,10 +1,6 @@
-﻿using System;
+﻿using BLL.IGTData;
+using BLL.Models; 
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using BLL.IGTData;
 
 namespace BLL
 {
@@ -13,6 +9,7 @@ namespace BLL
         private readonly IGTAccountData accountdata;
         private readonly IGTProfileData profiledata;
         private readonly IGTGamesData gamedata;
+
         public GTService(IGTAccountData accountdata, IGTProfileData profiledata, IGTGamesData gamedata)
         {
             this.accountdata = accountdata;
@@ -65,6 +62,16 @@ namespace BLL
         public List<ProfileInfo> GetAllProfiles()
         {
             var results = profiledata.GetAllProfiles();
+            return results;
+        }
+
+        public string GetServiceDetails()
+        {
+            return "Service Details";
+        }
+        public List<string> GetUserGames(int userId)
+        {
+            var results = gamedata.GetUserGames(userId);
             return results;
         }
     }
