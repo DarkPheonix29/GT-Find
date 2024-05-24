@@ -166,5 +166,25 @@ namespace DAL
             return profiles;
         }
 
+        public bool DeleteProfile(int userId)
+        {
+            try
+            {
+                using (MySqlConnection connection = ConnectionString.GetConnection())
+                {
+                    connection.Open();
+                    string query = "DELETE FROM Profile WHERE UserID = @UserID";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@UserID", userId);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occurred while deleting profile: {ex.Message}");
+                return false;
+            }
+        }
     }
 }
