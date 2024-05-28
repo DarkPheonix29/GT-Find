@@ -61,6 +61,19 @@ public class GTServiceTests
     }
 
     [Fact]
+    public void SaveProfile_EmptyBio_ReturnsArgumentNullExceptionTest()
+    {
+        // Arrange
+        mockProfileData.Setup(m => m.SaveProfile(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(true);
+
+        // Act
+        var result = gtService.SaveProfile(1, "username", "bio", "region", "", "platform", 5, 4, 3, 2, 1);
+
+        // Assert
+        Assert.Throws<System.ArgumentNullException>(() => result);
+    }
+
+    [Fact]
     public void DeleteProfile_Test()
     {
         // Arrange

@@ -2,16 +2,32 @@
 {
     public class ProfileInfo
     {
-        public int UserID { get; set; }
-        public string Username { get; set; }
-        public string Bio { get; set; }
-        public string Region { get; set; }
-        public string Country { get; set; }
-        public string Platform { get; set; }
-        public int Fun { get; set; }
-        public int Competitive { get; set; }
-        public int Serious { get; set; }
-        public int Communication { get; set; }
-        public int Dedication { get; set; }
+        public int UserID { get; }
+        public string Username { get; }
+        public string Bio { get; }
+        public string Region { get; }
+        public string Country { get; }
+        public string Platform { get; }
+        public int Fun { get; }
+        public int Competitive { get; }
+        public int Serious { get; }
+        public int Communication { get; }
+        public int Dedication { get; }
+ 
+
+        public ProfileInfo(int userId, string username, string bio, string region, string country, string platform, int fun, int competitive, int serious, int communication, int dedication)
+        {
+            UserID = userId;
+            Username = username;
+            Bio = bio;
+            Region = region;
+            Country = country;
+            Platform = platform;
+            Fun = fun;
+            Competitive = competitive;
+            Serious = serious;
+            Communication = communication;
+            Dedication = dedication;
+        }
     }
 }

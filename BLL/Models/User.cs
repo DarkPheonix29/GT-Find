@@ -2,7 +2,7 @@
 {
     public static class User
     {
-        public static string Username { get; set; }
-        public static int UserId { get; set; }
+        public static string Username { get; }
+        public static int UserId { get; }
     }
 }

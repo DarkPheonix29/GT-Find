@@ -31,6 +31,8 @@ namespace BLL
 
         public bool SaveProfile(int userId, string username, string bio, string region, string country, string platform, int funValue, int copValue, int srsValue, int comValue, int dedValue)
         {
+            if (string.IsNullOrEmpty(country)) { throw new ArgumentNullException("country can not be null"); }
+
             var results = profiledata.SaveProfile(userId, username, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
             return results;
         }
