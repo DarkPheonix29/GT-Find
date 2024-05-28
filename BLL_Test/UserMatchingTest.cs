@@ -10,22 +10,24 @@ public class UserMatchingTests
     public void FindMatches()
     {
         var mockGTService = new Mock<IGTService>();
-        var currentUserProfile = new ProfileInfo
-        {
-            UserID = 1,
-            Region = "Europe",
-            Platform = "PC",
-            Fun = 3,
-            Competitive = 2,
-            Serious = 4,
-            Communication = 5,
-            Dedication = 1
-        };
+        var currentUserProfile = new ProfileInfo(
+            1,
+            "username1",
+            "bio1",
+            "Europe",
+            "country1",
+            "PC",
+            3,
+            2,
+            4,
+            5,
+            1
+        );
 
         var otherProfiles = new List<ProfileInfo>
         {
-            new ProfileInfo { UserID = 2, Region = "Europe", Platform = "PC", Fun = 3, Competitive = 2, Serious = 4, Communication = 5, Dedication = 1 },
-            new ProfileInfo { UserID = 3, Region = "Europe", Platform = "PC", Fun = 3, Competitive = 2, Serious = 4, Communication = 5, Dedication = 2 }
+            new ProfileInfo(2, "username2", "bio2", "Europe", "country2", "PC", 3, 2, 4, 5, 1),
+            new ProfileInfo(3, "username3", "bio3", "Europe", "country3", "PC", 3, 2, 4, 5, 2)
         };
 
         mockGTService.Setup(service => service.RetrieveProfile(1)).Returns(currentUserProfile);
@@ -43,21 +45,23 @@ public class UserMatchingTests
     public void ReturnsNoMatches()
     {
         var mockGTService = new Mock<IGTService>();
-        var currentUserProfile = new ProfileInfo
-        {
-            UserID = 1,
-            Region = "Europe",
-            Platform = "PC",
-            Fun = 3,
-            Competitive = 2,
-            Serious = 4,
-            Communication = 5,
-            Dedication = 1
-        };
+        var currentUserProfile = new ProfileInfo(
+            1,
+            "username1",
+            "bio1",
+            "Europe",
+            "country1",
+            "PC",
+            3,
+            2,
+            4,
+            5,
+            1
+        );
 
         var otherProfiles = new List<ProfileInfo>
         {
-            new ProfileInfo { UserID = 2, Region = "Asia", Platform = "PlayStation", Fun = 5, Competitive = 5, Serious = 5, Communication = 5, Dedication = 5 }
+            new ProfileInfo(2, "username2", "bio2", "Asia", "country2", "PlayStation", 5, 5, 5, 5, 5)
         };
 
         mockGTService.Setup(service => service.RetrieveProfile(1)).Returns(currentUserProfile);

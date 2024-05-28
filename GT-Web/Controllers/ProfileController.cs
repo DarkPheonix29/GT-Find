@@ -1,8 +1,8 @@
 ﻿using BLL;
+using BLL.Models;
 using GT_Web.Extensions;
 using GT_Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace GT_Web.Controllers
@@ -20,20 +20,17 @@ namespace GT_Web.Controllers
         {
             var userId = User.GetUserId();
             var profileInfo = _gtService.RetrieveProfile(userId);
-            if (profileInfo.Username == null)
+            if (profileInfo == null)
             {
-                profileInfo.Username = User.Identity.Name;
+                return NotFound("Profile not found.");
             }
 
             var availableGames = _gtService.RetrieveGames();
             var userGames = _gtService.GetUserGames(userId);
 
-            var viewModel = new ProfileViewModel
-            {
-                ProfileInfo = profileInfo,
-                AvailableGames = availableGames,
-                SelectedGames = userGames
-            };
+            var viewModel = ProfileViewModel.FromProfileInfo(profileInfo);
+            viewModel.AvailableGames = availableGames;
+            viewModel.SelectedGames = userGames;
 
             Debug.WriteLine($"Profile Info: UserID = {profileInfo.UserID}, Username = {profileInfo.Username}");
             Debug.WriteLine($"User ID from claims: {userId}");
@@ -46,13 +43,33 @@ namespace GT_Web.Controllers
         {
             try
             {
-                var profileInfo = viewModel.ProfileInfo;
-                profileInfo.UserID = User.GetUserId(); // Ensure UserID is set
-                profileInfo.Username = User.Identity.Name;
+                var profileInfo = new ProfileInfo(
+                    User.GetUserId(),
+                    User.Identity.Name, // Use the current user's identity name for the Username
+                    viewModel.Bio,
+                    viewModel.Region,
+                    viewModel.Country,
+                    viewModel.Platform,
+                    viewModel.Fun,
+                    viewModel.Competitive,
+                    viewModel.Serious,
+                    viewModel.Communication,
+                    viewModel.Dedication
+                );
 
-                Debug.WriteLine($"Saving profile for UserID: {profileInfo.UserID}, Username: {profileInfo.Username}");
-
-                bool success = _gtService.SaveProfile(profileInfo.UserID, profileInfo.Username, profileInfo.Bio, profileInfo.Region, profileInfo.Country, profileInfo.Platform, profileInfo.Fun, profileInfo.Competitive, profileInfo.Serious, profileInfo.Communication, profileInfo.Dedication);
+                var success = _gtService.SaveProfile(
+                    profileInfo.UserID,
+                    profileInfo.Username,
+                    profileInfo.Bio,
+                    profileInfo.Region,
+                    profileInfo.Country,
+                    profileInfo.Platform,
+                    profileInfo.Fun,
+                    profileInfo.Competitive,
+                    profileInfo.Serious,
+                    profileInfo.Communication,
+                    profileInfo.Dedication
+                );
 
                 if (success)
                 {

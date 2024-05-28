@@ -1,4 +1,5 @@
 ﻿using BLL.Models;
+using System.Collections.Generic;
 
 namespace GT_Web.Models
 {
@@ -18,27 +19,41 @@ namespace GT_Web.Models
         public List<string> AvailableGames { get; set; }
         public List<string> SelectedGames { get; set; }
 
-        public ProfileInfo ConvertTo(ProfileViewModel profileViewModel)
+        // Conversion method from ProfileViewModel to ProfileInfo
+        public ProfileInfo ToProfileInfo()
         {
-            ProfileInfo profileInfo = new ProfileInfo(profileViewModel.UserID, profileViewModel.Username, profileViewModel.Bio, profileViewModel.Region, profileViewModel.Country, profileViewModel.Platform, profileViewModel.Fun, profileViewModel.Competitive, profileViewModel.Serious, profileViewModel.Communication, profileViewModel.Dedication);
-
-            return profileInfo;
+            return new ProfileInfo(
+                UserID,
+                Username,
+                Bio,
+                Region,
+                Country,
+                Platform,
+                Fun,
+                Competitive,
+                Serious,
+                Communication,
+                Dedication
+            );
         }
 
-        public ProfileViewModel ConvertTo(ProfileInfo profileInfo)
+        // Conversion method from ProfileInfo to ProfileViewModel
+        public static ProfileViewModel FromProfileInfo(ProfileInfo profileInfo)
         {
-            ProfileViewModel profileViewModel = new ProfileViewModel();
-            profileViewModel.UserID = profileInfo.UserID;
-            profileViewModel.Username = profileInfo.Username;
-            profileViewModel.Bio = profileInfo.Bio;
-            profileViewModel.Region = profileInfo.Region;
-            profileViewModel.Country = profileInfo.Country;
-            profileViewModel.Platform = profileInfo.Platform;
-            profileViewModel.Fun = profileInfo.Fun;
-            profileViewModel.Competitive = profileInfo.Competitive;
-            profileViewModel.Serious = profileInfo.Serious;
-            profileViewModel.Communication = profileInfo.Communication;
-            profileViewModel.Dedication = profileInfo.Dedication;
+            return new ProfileViewModel
+            {
+                UserID = profileInfo.UserID,
+                Username = profileInfo.Username,
+                Bio = profileInfo.Bio,
+                Region = profileInfo.Region,
+                Country = profileInfo.Country,
+                Platform = profileInfo.Platform,
+                Fun = profileInfo.Fun,
+                Competitive = profileInfo.Competitive,
+                Serious = profileInfo.Serious,
+                Communication = profileInfo.Communication,
+                Dedication = profileInfo.Dedication
+            };
         }
     }
 }

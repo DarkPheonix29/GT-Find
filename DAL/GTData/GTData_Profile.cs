@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BLL.IGTData;
 using BLL.Models;
 
@@ -79,18 +76,14 @@ namespace DAL
             }
         }
 
-
-
         public ProfileInfo RetrieveProfile(int userId)
         {
-            ProfileInfo profileInfo = new ProfileInfo();
-
             try
             {
                 using (MySqlConnection connection = ConnectionString.GetConnection())
                 {
                     connection.Open();
-                    string query = "SELECT Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication FROM Profile WHERE UserID = @UserID";
+                    string query = "SELECT Username, Bio, Region, Country, Platform, Fun, Competitive, Serious, Communication, Dedication FROM Profile WHERE UserID = @UserID";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("@UserID", userId);
 
@@ -98,16 +91,19 @@ namespace DAL
                     {
                         if (reader.Read())
                         {
-                            profileInfo.UserID = userId; // Ensure UserID is set
-                            profileInfo.Bio = reader.GetString("Bio");
-                            profileInfo.Region = reader.GetString("Region");
-                            profileInfo.Country = reader.GetString("Country");
-                            profileInfo.Platform = reader.GetString("Platform");
-                            profileInfo.Fun = reader.GetInt32("Fun");
-                            profileInfo.Competitive = reader.GetInt32("Competitive");
-                            profileInfo.Serious = reader.GetInt32("Serious");
-                            profileInfo.Communication = reader.GetInt32("Communication");
-                            profileInfo.Dedication = reader.GetInt32("Dedication");
+                            return new ProfileInfo(
+                                userId,
+                                reader.GetString("Username"),
+                                reader.GetString("Bio"),
+                                reader.GetString("Region"),
+                                reader.GetString("Country"),
+                                reader.GetString("Platform"),
+                                reader.GetInt32("Fun"),
+                                reader.GetInt32("Competitive"),
+                                reader.GetInt32("Serious"),
+                                reader.GetInt32("Communication"),
+                                reader.GetInt32("Dedication")
+                            );
                         }
                     }
                 }
@@ -117,9 +113,8 @@ namespace DAL
                 Debug.WriteLine($"An error occurred while retrieving profile: {ex.Message}");
             }
 
-            return profileInfo;
+            return null; // Or throw an exception if preferred
         }
-
 
         public List<ProfileInfo> GetAllProfiles()
         {
@@ -137,30 +132,26 @@ namespace DAL
                     {
                         while (reader.Read())
                         {
-                            ProfileInfo profile = new ProfileInfo
-                            {
-                                UserID = reader.GetInt32("UserID"),
-                                Username = reader.GetString("Username"),
-                                Bio = reader.GetString("Bio"),
-                                Region = reader.GetString("Region"),
-                                Country = reader.GetString("Country"),
-                                Platform = reader.GetString("Platform"),
-                                Fun = reader.GetInt32("Fun"),
-                                Competitive = reader.GetInt32("Competitive"),
-                                Serious = reader.GetInt32("Serious"),
-                                Communication = reader.GetInt32("Communication"),
-                                Dedication = reader.GetInt32("Dedication")
-                            };
-
-                            profiles.Add(profile);
+                            profiles.Add(new ProfileInfo(
+                                reader.GetInt32("UserID"),
+                                reader.GetString("Username"),
+                                reader.GetString("Bio"),
+                                reader.GetString("Region"),
+                                reader.GetString("Country"),
+                                reader.GetString("Platform"),
+                                reader.GetInt32("Fun"),
+                                reader.GetInt32("Competitive"),
+                                reader.GetInt32("Serious"),
+                                reader.GetInt32("Communication"),
+                                reader.GetInt32("Dedication")
+                            ));
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log the error (you can replace this with your preferred logging approach)
-                Console.WriteLine($"An error occurred while retrieving profiles: {ex.Message}");
+                Debug.WriteLine($"An error occurred while retrieving profiles: {ex.Message}");
             }
 
             return profiles;

@@ -37,7 +37,7 @@ public class GTServiceTests
     public void RetrieveProfile_Test()
     {
         // Arrange
-        var expectedProfile = new ProfileInfo { UserID = 1, Username = "username", Bio = "bio" };
+        var expectedProfile = new ProfileInfo(1, "username", "bio", "region", "country", "platform", 5, 4, 3, 2, 1);
         mockProfileData.Setup(m => m.RetrieveProfile(It.IsAny<int>())).Returns(expectedProfile);
 
         // Act
@@ -66,11 +66,8 @@ public class GTServiceTests
         // Arrange
         mockProfileData.Setup(m => m.SaveProfile(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(true);
 
-        // Act
-        var result = gtService.SaveProfile(1, "username", "bio", "region", "", "platform", 5, 4, 3, 2, 1);
-
-        // Assert
-        Assert.Throws<System.ArgumentNullException>(() => result);
+        // Act & Assert
+        Assert.Throws<System.ArgumentNullException>(() => gtService.SaveProfile(1, "username", null, "region", "country", "platform", 5, 4, 3, 2, 1));
     }
 
     [Fact]
@@ -161,8 +158,8 @@ public class GTServiceTests
         // Arrange
         var expectedProfiles = new List<ProfileInfo>
         {
-            new ProfileInfo { UserID = 1, Username = "user1", Bio = "bio1" },
-            new ProfileInfo { UserID = 2, Username = "user2", Bio = "bio2" }
+            new ProfileInfo(1, "user1", "bio1", "region1", "country1", "platform1", 5, 4, 3, 2, 1),
+            new ProfileInfo(2, "user2", "bio2", "region2", "country2", "platform2", 4, 3, 2, 1, 5)
         };
         mockProfileData.Setup(m => m.GetAllProfiles()).Returns(expectedProfiles);
 

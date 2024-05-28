@@ -13,7 +13,6 @@
         public int Serious { get; }
         public int Communication { get; }
         public int Dedication { get; }
- 
 
         public ProfileInfo(int userId, string username, string bio, string region, string country, string platform, int fun, int competitive, int serious, int communication, int dedication)
         {
