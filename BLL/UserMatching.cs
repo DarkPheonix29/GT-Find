@@ -27,31 +27,26 @@ namespace BLL
         {
             List<ProfileInfo> potentialMatches = new List<ProfileInfo>();
 
-            // Retrieve the profile of the current user
+
             ProfileInfo currentUserProfile = _gtService.RetrieveProfile(currentUserId);
 
             if (currentUserProfile == null)
             {
-                // Handle the case where the current user's profile is not found
-                // You may want to display an error message or take appropriate action
                 return potentialMatches;
             }
 
             // Retrieve all profiles
-            List<ProfileInfo> allProfiles = _gtService.GetAllProfiles(); // You need to implement this method in GTService or elsewhere
+            List<ProfileInfo> allProfiles = _gtService.GetAllProfiles();
 
-            // Calculate similarity scores for all profiles
+
             Dictionary<ProfileInfo, double> similarityScores = new Dictionary<ProfileInfo, double>();
 
             foreach (ProfileInfo profile in allProfiles)
             {
-                // Skip the current user's profile
                 if (profile.UserID == currentUserId)
                 {
                     continue;
                 }
-
-                // Check if region and platform match
                 if (profile.Region != currentUserProfile.Region || profile.Platform != currentUserProfile.Platform)
                 {
                     continue;
@@ -61,13 +56,11 @@ namespace BLL
                 similarityScores.Add(profile, similarityScore);
             }
 
-            // Sort profiles by similarity score and category difference in descending order
             var sortedProfiles = similarityScores.OrderByDescending(kv => kv.Value)
                                                  .ThenByDescending(kv => CalculateCategoryDifference(currentUserProfile, kv.Key));
-            // Adjust the threshold as needed (lower values mean more profiles will be included)
             double similarityThreshold = 0.5;
 
-            // Add profiles with similarity score above the threshold to potential matches
+  
             foreach (var kvp in sortedProfiles)
             {
                 if (kvp.Value > similarityThreshold)
@@ -91,7 +84,7 @@ namespace BLL
                     int value1 = (int)preference.GetValue(profile1);
                     int value2 = (int)preference.GetValue(profile2);
 
-                    // Check if the preferences differ by one
+ 
                     if (Math.Abs(value1 - value2) == 1)
                     {
                         categoryDifference += PreferenceWeights[preference.Name];
@@ -115,7 +108,7 @@ namespace BLL
                     int value1 = (int)preference.GetValue(profile1);
                     int value2 = (int)preference.GetValue(profile2);
 
-                    // Check if the preferences match
+
                     if (value1 == value2)
                     {
                         matchingPreferences++;
@@ -125,7 +118,7 @@ namespace BLL
                 }
             }
 
-            // Calculate similarity based on the number of matching preferences
+
             return (double)matchingPreferences / totalPreferences;
         }
 
