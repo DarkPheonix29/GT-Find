@@ -1,7 +1,11 @@
 ﻿using BLL.IGTData;
+<<<<<<< Updated upstream
 using BLL.Models;
 using BLL.Validators;
 using System;
+=======
+using BLL.Models; 
+>>>>>>> Stashed changes
 using System.Collections.Generic;
 
 namespace BLL
@@ -21,21 +25,19 @@ namespace BLL
 
         public string RetrievePass(string username)
         {
-            return accountdata.RetrievePass(username);
+            var result = accountdata.RetrievePass(username);
+            return result;
         }
 
         public bool CreateAccount(string email, string hashedPassword, string username)
         {
-            if (!Validator.IsValidUsername(username))
-            {
-                throw new ArgumentException("Username cannot be longer than 20 characters.");
-            }
-
-            return accountdata.CreateAccount(email, hashedPassword, username);
+            var results = accountdata.CreateAccount(email, hashedPassword, username);
+            return results;
         }
 
         public bool SaveProfile(int userId, string username, string bio, string region, string country, string platform, int funValue, int copValue, int srsValue, int comValue, int dedValue)
         {
+<<<<<<< Updated upstream
             if (string.IsNullOrEmpty(username) || !Validator.IsValidUsername(username))
             {
                 throw new ArgumentException("Invalid or missing username.");
@@ -64,41 +66,42 @@ namespace BLL
             }
 
             return profiledata.SaveProfile(userId, username, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
+=======
+            if (string.IsNullOrEmpty(country)) { throw new ArgumentNullException("country can not be null"); }
+
+            var results = profiledata.SaveProfile(userId, username, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
+            return results;
+>>>>>>> Stashed changes
         }
 
         public int RetrieveUserId(string username)
         {
-            return accountdata.RetrieveUserId(username);
+            var results = accountdata.RetrieveUserId(username);
+            return results;
         }
 
         public ProfileInfo RetrieveProfile(int userId)
         {
-            return profiledata.RetrieveProfile(userId);
+            var results = profiledata.RetrieveProfile(userId);
+            return results;
         }
 
         public List<string> RetrieveGames()
         {
-            return gamedata.RetrieveGames();
+            var results = gamedata.RetrieveGames();
+            return results;
         }
 
         public bool SaveUserGames(int userId, List<string> selectedGames)
         {
-            return gamedata.SaveUserGames(userId, selectedGames);
+            var results = gamedata.SaveUserGames(userId, selectedGames);
+            return results;
         }
 
         public List<ProfileInfo> GetAllProfiles()
         {
-            return profiledata.GetAllProfiles();
-        }
-
-        public string GetServiceDetails()
-        {
-            return "Service Details";
-        }
-
-        public List<string> GetUserGames(int userId)
-        {
-            return gamedata.GetUserGames(userId);
+            var results = profiledata.GetAllProfiles();
+            return results;
         }
 
         public bool DeleteProfile(int userId)

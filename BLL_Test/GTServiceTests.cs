@@ -3,8 +3,6 @@ using Moq;
 using BLL;
 using BLL.IGTData;
 using BLL.Models;
-using BLL.Validators;
-using System;
 using System.Collections.Generic;
 
 public class GTServiceTests
@@ -23,30 +21,27 @@ public class GTServiceTests
     }
 
     [Fact]
-    public void CreateAccount_ValidUsername_Test()
+    public void CreateAccount_Test()
     {
         // Arrange
         mockAccountData.Setup(m => m.CreateAccount(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(true);
 
         // Act
-        var result = gtService.CreateAccount("email@example.com", "hashedPassword", "validusername");
+        var result = gtService.CreateAccount("email@example.com", "hashedPassword", "username");
 
         // Assert
         Assert.True(result);
     }
 
     [Fact]
-    public void CreateAccount_InvalidUsername_Test()
-    {
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => gtService.CreateAccount("email@example.com", "hashedPassword", "invalidusernameexceeding20chars"));
-    }
-
-    [Fact]
     public void RetrieveProfile_Test()
     {
         // Arrange
+<<<<<<< Updated upstream
         var expectedProfile = new ProfileInfo(1, "username", "bio", "Europe", "Germany", "PC", 5, 4, 3, 2, 1);
+=======
+        var expectedProfile = new ProfileInfo(1, "username", "bio", "region", "country", "platform", 5, 4, 3, 2, 1);
+>>>>>>> Stashed changes
         mockProfileData.Setup(m => m.RetrieveProfile(It.IsAny<int>())).Returns(expectedProfile);
 
         // Act
@@ -57,19 +52,20 @@ public class GTServiceTests
     }
 
     [Fact]
-    public void SaveProfile_ValidData_Test()
+    public void SaveProfile_Test()
     {
         // Arrange
         mockProfileData.Setup(m => m.SaveProfile(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(true);
 
         // Act
-        var result = gtService.SaveProfile(1, "username", "bio", "Europe", "Germany", "PC", 5, 4, 3, 2, 1);
+        var result = gtService.SaveProfile(1, "username", "bio", "region", "country", "platform", 5, 4, 3, 2, 1);
 
         // Assert
         Assert.True(result);
     }
 
     [Fact]
+<<<<<<< Updated upstream
     public void SaveProfile_InvalidCountry_Test()
     {
         // Act & Assert
@@ -102,6 +98,15 @@ public class GTServiceTests
     {
         // Act & Assert
         Assert.Throws<ArgumentException>(() => gtService.SaveProfile(1, "username", "bio", "Europe", null, "PC", 5, 4, 3, 2, 1));
+=======
+    public void SaveProfile_EmptyBio_ReturnsArgumentNullExceptionTest()
+    {
+        // Arrange
+        mockProfileData.Setup(m => m.SaveProfile(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(true);
+
+        // Act & Assert
+        Assert.Throws<System.ArgumentNullException>(() => gtService.SaveProfile(1, "username", null, "region", "country", "platform", 5, 4, 3, 2, 1));
+>>>>>>> Stashed changes
     }
 
     [Fact]
@@ -192,8 +197,13 @@ public class GTServiceTests
         // Arrange
         var expectedProfiles = new List<ProfileInfo>
         {
+<<<<<<< Updated upstream
             new ProfileInfo(1, "user1", "bio1", "Europe", "Germany", "PC", 5, 4, 3, 2, 1),
             new ProfileInfo(2, "user2", "bio2", "Asia", "China", "Playstation", 4, 3, 2, 1, 5)
+=======
+            new ProfileInfo(1, "user1", "bio1", "region1", "country1", "platform1", 5, 4, 3, 2, 1),
+            new ProfileInfo(2, "user2", "bio2", "region2", "country2", "platform2", 4, 3, 2, 1, 5)
+>>>>>>> Stashed changes
         };
         mockProfileData.Setup(m => m.GetAllProfiles()).Returns(expectedProfiles);
 
