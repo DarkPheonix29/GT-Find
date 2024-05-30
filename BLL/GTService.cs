@@ -1,11 +1,7 @@
 ﻿using BLL.IGTData;
-<<<<<<< HEAD
-using BLL.Models; 
-=======
 using BLL.Models;
 using BLL.Validators;
 using System;
->>>>>>> origin/Unit-tests
 using System.Collections.Generic;
 
 namespace BLL
@@ -40,12 +36,6 @@ namespace BLL
 
         public bool SaveProfile(int userId, string username, string bio, string region, string country, string platform, int funValue, int copValue, int srsValue, int comValue, int dedValue)
         {
-<<<<<<< HEAD
-            if (string.IsNullOrEmpty(country)) { throw new ArgumentNullException("country can not be null"); }
-
-            var results = profiledata.SaveProfile(userId, username, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
-            return results;
-=======
             if (string.IsNullOrEmpty(username) || !Validator.IsValidUsername(username))
             {
                 throw new ArgumentException("Invalid or missing username.");
@@ -74,7 +64,6 @@ namespace BLL
             }
 
             return profiledata.SaveProfile(userId, username, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
->>>>>>> origin/Unit-tests
         }
 
         public int RetrieveUserId(string username)
@@ -112,19 +101,9 @@ namespace BLL
             return gamedata.GetUserGames(userId);
         }
 
-        public string GetServiceDetails()
-        {
-            return "Service Details";
-        }
-        public List<string> GetUserGames(int userId)
-        {
-            var results = gamedata.GetUserGames(userId);
-            return results;
-        }
         public bool DeleteProfile(int userId)
         {
-            var results = profiledata.DeleteProfile(userId);
-            return results;
+            return profiledata.DeleteProfile(userId);
         }
     }
 }

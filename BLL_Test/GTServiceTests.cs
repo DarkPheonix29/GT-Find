@@ -46,11 +46,7 @@ public class GTServiceTests
     public void RetrieveProfile_Test()
     {
         // Arrange
-<<<<<<< HEAD
-        var expectedProfile = new ProfileInfo(1, "username", "bio", "region", "country", "platform", 5, 4, 3, 2, 1);
-=======
         var expectedProfile = new ProfileInfo(1, "username", "bio", "Europe", "Germany", "PC", 5, 4, 3, 2, 1);
->>>>>>> origin/Unit-tests
         mockProfileData.Setup(m => m.RetrieveProfile(It.IsAny<int>())).Returns(expectedProfile);
 
         // Act
@@ -74,15 +70,6 @@ public class GTServiceTests
     }
 
     [Fact]
-<<<<<<< HEAD
-    public void SaveProfile_EmptyBio_ReturnsArgumentNullExceptionTest()
-    {
-        // Arrange
-        mockProfileData.Setup(m => m.SaveProfile(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(true);
-
-        // Act & Assert
-        Assert.Throws<System.ArgumentNullException>(() => gtService.SaveProfile(1, "username", null, "region", "country", "platform", 5, 4, 3, 2, 1));
-=======
     public void SaveProfile_InvalidCountry_Test()
     {
         // Act & Assert
@@ -115,7 +102,6 @@ public class GTServiceTests
     {
         // Act & Assert
         Assert.Throws<ArgumentException>(() => gtService.SaveProfile(1, "username", "bio", "Europe", null, "PC", 5, 4, 3, 2, 1));
->>>>>>> origin/Unit-tests
     }
 
     [Fact]
@@ -206,13 +192,8 @@ public class GTServiceTests
         // Arrange
         var expectedProfiles = new List<ProfileInfo>
         {
-<<<<<<< HEAD
-            new ProfileInfo(1, "user1", "bio1", "region1", "country1", "platform1", 5, 4, 3, 2, 1),
-            new ProfileInfo(2, "user2", "bio2", "region2", "country2", "platform2", 4, 3, 2, 1, 5)
-=======
             new ProfileInfo(1, "user1", "bio1", "Europe", "Germany", "PC", 5, 4, 3, 2, 1),
             new ProfileInfo(2, "user2", "bio2", "Asia", "China", "Playstation", 4, 3, 2, 1, 5)
->>>>>>> origin/Unit-tests
         };
         mockProfileData.Setup(m => m.GetAllProfiles()).Returns(expectedProfiles);
 
