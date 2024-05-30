@@ -15,7 +15,11 @@ public class UserMatchingTests
             "username1",
             "bio1",
             "Europe",
+<<<<<<< HEAD
             "country1",
+=======
+            "Germany",
+>>>>>>> origin/Unit-tests
             "PC",
             3,
             2,
@@ -26,8 +30,13 @@ public class UserMatchingTests
 
         var otherProfiles = new List<ProfileInfo>
         {
+<<<<<<< HEAD
             new ProfileInfo(2, "username2", "bio2", "Europe", "country2", "PC", 3, 2, 4, 5, 1),
             new ProfileInfo(3, "username3", "bio3", "Europe", "country3", "PC", 3, 2, 4, 5, 2)
+=======
+            new ProfileInfo(2, "username2", "bio2", "Europe", "Germany", "PC", 3, 2, 4, 5, 1),
+            new ProfileInfo(3, "username3", "bio3", "Europe", "Germany", "PC", 3, 2, 4, 5, 2)
+>>>>>>> origin/Unit-tests
         };
 
         mockGTService.Setup(service => service.RetrieveProfile(1)).Returns(currentUserProfile);
@@ -50,7 +59,11 @@ public class UserMatchingTests
             "username1",
             "bio1",
             "Europe",
+<<<<<<< HEAD
             "country1",
+=======
+            "Germany",
+>>>>>>> origin/Unit-tests
             "PC",
             3,
             2,
@@ -61,7 +74,11 @@ public class UserMatchingTests
 
         var otherProfiles = new List<ProfileInfo>
         {
+<<<<<<< HEAD
             new ProfileInfo(2, "username2", "bio2", "Asia", "country2", "PlayStation", 5, 5, 5, 5, 5)
+=======
+            new ProfileInfo(2, "username2", "bio2", "Asia", "China", "Playstation", 5, 5, 5, 5, 5)
+>>>>>>> origin/Unit-tests
         };
 
         mockGTService.Setup(service => service.RetrieveProfile(1)).Returns(currentUserProfile);
