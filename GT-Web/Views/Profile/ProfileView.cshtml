@@ -10,31 +10,61 @@
 </div>
 
 <div class="profile-container">
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
     <form asp-action="SaveProfile" method="post">
         <div class="form-group">
-            <label asp-for="ProfileInfo.Username" class="control-label"></label>
-            <input asp-for="ProfileInfo.Username" class="form-control" readonly="readonly" value="@Model.ProfileInfo.Username" />
-            <input type="hidden" asp-for="ProfileInfo.Username" value="@Model.ProfileInfo.Username" /> 
+            <label asp-for="Username" class="control-label"></label>
+            <input asp-for="Username" class="form-control" readonly="readonly" />
         </div>
         <div class="form-group">
-            <label asp-for="ProfileInfo.Bio" class="control-label"></label>
-            <textarea asp-for="ProfileInfo.Bio" class="form-control"></textarea>
-            <span asp-validation-for="ProfileInfo.Bio" class="text-danger"></span>
+            <label asp-for="Bio" class="control-label"></label>
+            <textarea asp-for="Bio" class="form-control"></textarea>
+            <span asp-validation-for="Bio" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ProfileInfo.Region" class="control-label"></label>
-            <input asp-for="ProfileInfo.Region" class="form-control" />
-            <span asp-validation-for="ProfileInfo.Region" class="text-danger"></span>
+            <label asp-for="Region" class="control-label"></label>
+            <input asp-for="Region" class="form-control" list="regionList" />
+            <datalist id="regionList">
+                @foreach (var region in Model.ValidRegions)
+                {
+                    <option value="@region"></option>
+                }
+            </datalist>
+            <span asp-validation-for="Region" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ProfileInfo.Country" class="control-label"></label>
-            <input asp-for="ProfileInfo.Country" class="form-control" />
-            <span asp-validation-for="ProfileInfo.Country" class="text-danger"></span>
+            <label asp-for="Country" class="control-label"></label>
+            <input asp-for="Country" class="form-control" list="countryList" />
+            <datalist id="countryList">
+                @foreach (var country in Model.ValidCountries)
+                {
+                    <option value="@country"></option>
+                }
+            </datalist>
+            <span asp-validation-for="Country" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ProfileInfo.Platform" class="control-label"></label>
-            <input asp-for="ProfileInfo.Platform" class="form-control" />
-            <span asp-validation-for="ProfileInfo.Platform" class="text-danger"></span>
+            <label asp-for="Platform" class="control-label"></label>
+            <input asp-for="Platform" class="form-control" list="platformList" />
+            <datalist id="platformList">
+                @foreach (var platform in Model.ValidPlatforms)
+                {
+                    <option value="@platform"></option>
+                }
+            </datalist>
+            <span asp-validation-for="Platform" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label>Games</label>
@@ -46,40 +76,39 @@
                 }
             </select>
         </div>
-        <!-- Add the checkboxes for preferences -->
         <div class="form-group">
             <label>Fun</label>
             @for (int i = 1; i <= 5; i++)
             {
-                <input type="radio" name="ProfileInfo.Fun" value="@i" @(Model.ProfileInfo.Fun == i ? "checked" : null) /> @i
+                <input type="radio" name="Fun" value="@i" @(Model.Fun == i ? "checked" : null) /> @i
             }
         </div>
         <div class="form-group">
             <label>Competitive</label>
             @for (int i = 1; i <= 5; i++)
             {
-                <input type="radio" name="ProfileInfo.Competitive" value="@i" @(Model.ProfileInfo.Competitive == i ? "checked" : null) /> @i
+                <input type="radio" name="Competitive" value="@i" @(Model.Competitive == i ? "checked" : null) /> @i
             }
         </div>
         <div class="form-group">
             <label>Serious</label>
             @for (int i = 1; i <= 5; i++)
             {
-                <input type="radio" name="ProfileInfo.Serious" value="@i" @(Model.ProfileInfo.Serious == i ? "checked" : null) /> @i
+                <input type="radio" name="Serious" value="@i" @(Model.Serious == i ? "checked" : null) /> @i
             }
         </div>
         <div class="form-group">
             <label>Communication</label>
             @for (int i = 1; i <= 5; i++)
             {
-                <input type="radio" name="ProfileInfo.Communication" value="@i" @(Model.ProfileInfo.Communication == i ? "checked" : null) /> @i
+                <input type="radio" name="Communication" value="@i" @(Model.Communication == i ? "checked" : null) /> @i
             }
         </div>
         <div class="form-group">
             <label>Dedication</label>
             @for (int i = 1; i <= 5; i++)
             {
-                <input type="radio" name="ProfileInfo.Dedication" value="@i" @(Model.ProfileInfo.Dedication == i ? "checked" : null) /> @i
+                <input type="radio" name="Dedication" value="@i" @(Model.Dedication == i ? "checked" : null) /> @i
             }
         </div>
         <div class="form-group">
@@ -105,16 +134,16 @@
         background-color: #fff;
     }
 
-        .profile-container .form-group {
-            margin-bottom: 15px;
-        }
+    .profile-container .form-group {
+        margin-bottom: 15px;
+    }
 
-        .profile-container .form-control {
-            width: 100%;
-        }
+    .profile-container .form-control {
+        width: 100%;
+    }
 
     .logo-body {
-        width: 100px; /* Adjust the size as needed */
+        width: 100px;
         height: auto;
     }
 </style>

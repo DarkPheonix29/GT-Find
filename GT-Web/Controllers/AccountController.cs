@@ -78,6 +78,12 @@ namespace GT_Web.Controllers
                 return View("SignUpView");
             }
 
+            if (!BLL.Validators.Validator.IsValidUsername(username))
+            {
+                ModelState.AddModelError(string.Empty, "Username cannot be longer than 20 characters.");
+                return View("SignUpView");
+            }
+
             var hashedPassword = AuthManager.SecurePassword(password);
 
             bool accountCreated = _gtService.CreateAccount(email, hashedPassword, username);

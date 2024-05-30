@@ -1,8 +1,11 @@
-﻿namespace BLL.Models
+﻿public class User
 {
-    public static class User
+    public string Username { get; }
+    public int UserId { get; }
+
+    public User(string username, int userId)
     {
-        public static string Username { get; }
-        public static int UserId { get; }
+        Username = username;
+        UserId = userId;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BLL.Models;
+using BLL.Validators;
 using System.Collections.Generic;
 
 namespace GT_Web.Models
@@ -18,26 +19,10 @@ namespace GT_Web.Models
         public int Dedication { get; set; }
         public List<string> AvailableGames { get; set; }
         public List<string> SelectedGames { get; set; }
+        public List<string> ValidCountries { get; set; } = Validator.GetValidCountries();
+        public List<string> ValidRegions { get; set; } = Validator.GetValidRegions();
+        public List<string> ValidPlatforms { get; set; } = Validator.GetValidPlatforms();
 
-        // Conversion method from ProfileViewModel to ProfileInfo
-        public ProfileInfo ToProfileInfo()
-        {
-            return new ProfileInfo(
-                UserID,
-                Username,
-                Bio,
-                Region,
-                Country,
-                Platform,
-                Fun,
-                Competitive,
-                Serious,
-                Communication,
-                Dedication
-            );
-        }
-
-        // Conversion method from ProfileInfo to ProfileViewModel
         public static ProfileViewModel FromProfileInfo(ProfileInfo profileInfo)
         {
             return new ProfileViewModel
@@ -54,6 +39,23 @@ namespace GT_Web.Models
                 Communication = profileInfo.Communication,
                 Dedication = profileInfo.Dedication
             };
+        }
+
+        public ProfileInfo ToProfileInfo(int userId, string username)
+        {
+            return new ProfileInfo(
+                userId,
+                username,
+                Bio,
+                Region,
+                Country,
+                Platform,
+                Fun,
+                Competitive,
+                Serious,
+                Communication,
+                Dedication
+            );
         }
     }
 }

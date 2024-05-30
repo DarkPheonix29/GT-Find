@@ -91,6 +91,7 @@ namespace DAL
                     {
                         if (reader.Read())
                         {
+                            Debug.WriteLine($"Profile found for UserID {userId}: Username={reader.GetString("Username")}");
                             return new ProfileInfo(
                                 userId,
                                 reader.GetString("Username"),
@@ -105,16 +106,21 @@ namespace DAL
                                 reader.GetInt32("Dedication")
                             );
                         }
+                        else
+                        {
+                            Debug.WriteLine($"No profile found for UserID {userId}");
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"An error occurred while retrieving profile: {ex.Message}");
+                Debug.WriteLine($"An error occurred while retrieving profile for UserID {userId}: {ex.Message}");
             }
 
             return null; // Or throw an exception if preferred
         }
+
 
         public List<ProfileInfo> GetAllProfiles()
         {

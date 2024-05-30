@@ -69,30 +69,30 @@ namespace GT_Find.Lay_outs
         {
             try
             {
-                // Get the current user's ID
-                int currentUserId = User.UserId; // Assuming User.UserId is accessible
+               
+                int currentUserId = UserSession.CurrentUser.UserId; ;
 
-                // Instantiate UserMatching class
+        
                 UserMatching userMatching = new UserMatching(gtService);
 
-                // Find potential matches for the current user
+          
                 List<ProfileInfo> potentialMatches = userMatching.FindMatches(currentUserId);
 
                 Debug.WriteLine($"Number of potential matches: {potentialMatches.Count}");
 
-                // Clear existing ProfileBox controls
+             
                 flowLayoutPanelProfiles.Controls.Clear();
 
-                // Add ProfileBox controls for each potential match
+          
                 foreach (ProfileInfo profile in potentialMatches)
                 {
-                    // Create a new ProfileBox
+         
                     ProfileBox profileBox = new ProfileBox();
 
-                    // Set profile information
+
                     profileBox.SetProfileInfo(profile.Username, profile.Bio, profile.Region, profile.Country, profile.Platform);
 
-                    // Add the ProfileBox to the flowLayoutPanel
+   
                     flowLayoutPanelProfiles.Controls.Add(profileBox);
                 }
             }

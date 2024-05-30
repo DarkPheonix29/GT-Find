@@ -3,13 +3,8 @@ using BLL.Models;
 using DAL;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GT_Find.Lay_outs
@@ -17,7 +12,6 @@ namespace GT_Find.Lay_outs
     public partial class Profile : Form
     {
         private readonly GTService gtService;
-
 
         private int funValue = 0;
         private int copValue = 0;
@@ -28,13 +22,42 @@ namespace GT_Find.Lay_outs
         public Profile()
         {
             InitializeComponent();
-            countrytxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            regiontxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            platformtxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             this.gtService = new GTService(new GTData_Account(), new GTData_Profile(), new GTData_Games());
             this.Load += Profile_Load;
-         
+
             AttachCheckboxEventHandlers();
+
+            // Populate the auto-complete sources
+            PopulateCountryAutoComplete();
+            PopulateRegionAutoComplete();
+            PopulatePlatformAutoComplete();
+        }
+
+        private void PopulateCountryAutoComplete()
+        {
+            AutoCompleteStringCollection countryCollection = new AutoCompleteStringCollection();
+            countryCollection.AddRange(BLL.Validators.Validator.GetValidCountries().ToArray());
+            countrytxt.AutoCompleteCustomSource = countryCollection;
+            countrytxt.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            countrytxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        }
+
+        private void PopulateRegionAutoComplete()
+        {
+            AutoCompleteStringCollection regionCollection = new AutoCompleteStringCollection();
+            regionCollection.AddRange(BLL.Validators.Validator.GetValidRegions().ToArray());
+            regiontxt.AutoCompleteCustomSource = regionCollection;
+            regiontxt.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            regiontxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        }
+
+        private void PopulatePlatformAutoComplete()
+        {
+            AutoCompleteStringCollection platformCollection = new AutoCompleteStringCollection();
+            platformCollection.AddRange(BLL.Validators.Validator.GetValidPlatforms().ToArray());
+            platformtxt.AutoCompleteCustomSource = platformCollection;
+            platformtxt.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            platformtxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
         private void Profile_Load(object sender, EventArgs e)
@@ -42,25 +65,25 @@ namespace GT_Find.Lay_outs
             homelbl.Visible = false;
             findlbl.Visible = false;
             profilelbl.Visible = false;
-            LoadUserProfile(User.UserId);
-            LoadGames();
 
+            try
+            {
+                LoadUserProfile(UserSession.CurrentUser.UserId);
+                LoadGames();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while loading the profile: {ex.Message}");
+            }
         }
 
         private void openmenu(object sender, EventArgs e)
         {
-            if (homelbl.Visible == false && findlbl.Visible == false && profilelbl.Visible == false)
-            {
-                homelbl.Visible = true;
-                findlbl.Visible = true;
-                profilelbl.Visible = true;
-            }
-            else if (homelbl.Visible == true && findlbl.Visible == true && profilelbl.Visible == true)
-            {
-                homelbl.Visible = false;
-                findlbl.Visible = false;
-                profilelbl.Visible = false;
-            }
+            bool isVisible = homelbl.Visible;
+
+            homelbl.Visible = !isVisible;
+            findlbl.Visible = !isVisible;
+            profilelbl.Visible = !isVisible;
         }
 
         public void gotofindpage(object sender, EventArgs e)
@@ -79,7 +102,6 @@ namespace GT_Find.Lay_outs
 
         private void AttachCheckboxEventHandlers()
         {
-     
             EventHandler checkBox_CheckedChanged = (sender, e) =>
             {
                 CheckBox clickedCheckbox = (CheckBox)sender;
@@ -87,12 +109,10 @@ namespace GT_Find.Lay_outs
                 UncheckOtherCheckboxes(clickedCheckbox);
             };
 
-     
             foreach (CheckBox checkBox in Controls.OfType<CheckBox>())
             {
                 checkBox.CheckedChanged += checkBox_CheckedChanged;
 
-          
                 switch (checkBox.Name)
                 {
                     case "fun1":
@@ -134,10 +154,8 @@ namespace GT_Find.Lay_outs
             }
         }
 
-
         private void UncheckOtherCheckboxes(CheckBox clickedCheckbox)
         {
-      
             foreach (CheckBox checkBox in Controls.OfType<CheckBox>())
             {
                 if (checkBox != clickedCheckbox && checkBox.Tag == clickedCheckbox.Tag)
@@ -149,8 +167,8 @@ namespace GT_Find.Lay_outs
 
         private void SaveProfileButton_Click(object sender, EventArgs e)
         {
-            string username = User.Username;
-            int userId = User.UserId;
+            string username = UserSession.CurrentUser.Username;
+            int userId = UserSession.CurrentUser.UserId;
             string bio = biotext.Text;
             string region = regiontxt.Text;
             string country = countrytxt.Text;
@@ -158,14 +176,36 @@ namespace GT_Find.Lay_outs
 
             List<string> selectedGames = GetSelectedGames();
 
-
             try
             {
+                if (!BLL.Validators.Validator.IsValidCountry(country))
+                {
+                    MessageBox.Show("Invalid country.");
+                    return;
+                }
+
+                if (!BLL.Validators.Validator.IsValidRegion(region))
+                {
+                    MessageBox.Show("Invalid region.");
+                    return;
+                }
+
+                if (!BLL.Validators.Validator.IsValidPlatform(platform))
+                {
+                    MessageBox.Show("Invalid platform.");
+                    return;
+                }
+
+                if (!BLL.Validators.Validator.IsValidUsername(username))
+                {
+                    MessageBox.Show("Username cannot be longer than 20 characters.");
+                    return;
+                }
+
                 bool success = gtService.SaveProfile(userId, username, bio, region, country, platform, funValue, copValue, srsValue, comValue, dedValue);
 
                 if (success)
                 {
-
                     success = SaveGames(selectedGames);
 
                     if (success)
@@ -188,11 +228,9 @@ namespace GT_Find.Lay_outs
             }
         }
 
-
         private List<string> GetSelectedGames()
         {
             List<string> selectedGames = new List<string>();
-
 
             foreach (var selectedItem in GameBox.SelectedItems)
             {
@@ -204,18 +242,16 @@ namespace GT_Find.Lay_outs
 
         private bool SaveGames(List<string> selectedGames)
         {
-            int userId = User.UserId;
+            int userId = UserSession.CurrentUser.UserId;
 
             try
             {
-                // Log the selected games
                 Debug.WriteLine("Selected Games:");
                 foreach (var game in selectedGames)
                 {
                     Debug.WriteLine(game);
                 }
 
-                // Attempt to save the selected games
                 bool success = gtService.SaveUserGames(userId, selectedGames);
 
                 if (success)
@@ -231,12 +267,10 @@ namespace GT_Find.Lay_outs
             }
             catch (Exception ex)
             {
-                // Log any exceptions that occur
                 Debug.WriteLine($"An error occurred while saving user games: {ex.Message}");
                 return false;
             }
         }
-
 
         private void fun_CheckedChanged(object sender, EventArgs e)
         {
@@ -265,35 +299,24 @@ namespace GT_Find.Lay_outs
 
         private int GetCheckboxValue(object sender)
         {
-
             CheckBox checkBox = (CheckBox)sender;
-
-
-            string categoryName = checkBox.Name.Substring(0, 3); 
-            int value = int.Parse(checkBox.Name.Substring(3)); 
-
-
-            if (checkBox.Checked)
-            {
-
-                return value;
-            }
-            else
-            {
-
-                return 0;
-            }
+            return checkBox.Checked ? int.Parse(checkBox.Name.Substring(3)) : 0;
         }
 
         private void LoadUserProfile(int userId)
         {
-
             ProfileInfo profileInfo = gtService.RetrieveProfile(userId);
+
+            if (profileInfo == null)
+            {
+                MessageBox.Show("Profile not found for the user.");
+                return;
+            }
 
             biotext.Text = profileInfo.Bio;
             regiontxt.Text = profileInfo.Region;
             countrytxt.Text = profileInfo.Country;
-            platformtxt.Text = profileInfo.Region;
+            platformtxt.Text = profileInfo.Platform;
 
             funValue = profileInfo.Fun;
             copValue = profileInfo.Competitive;
@@ -312,22 +335,19 @@ namespace GT_Find.Lay_outs
         {
             foreach (CheckBox checkBox in Controls.OfType<CheckBox>())
             {
-                if (checkBox.Tag?.ToString() == category)
+                if (checkBox.Name.StartsWith(category))
                 {
-                    int index = int.Parse(checkBox.Name.Substring(category.Length)); 
-                    checkBox.Checked = index == value; 
+                    int index = int.Parse(checkBox.Name.Substring(category.Length));
+                    checkBox.Checked = index == value;
                 }
             }
         }
 
         private void LoadGames()
         {
-
             List<string> games = gtService.RetrieveGames();
 
-
-           GameBox.Items.Clear();
-
+            GameBox.Items.Clear();
 
             foreach (string game in games)
             {
@@ -335,12 +355,9 @@ namespace GT_Find.Lay_outs
             }
         }
 
-        
-
-
         private void label11_Click(object sender, EventArgs e)
         {
-
+            // Handle label click if needed
         }
     }
 }

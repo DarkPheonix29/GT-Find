@@ -2,16 +2,7 @@
 using BLL.Models;
 using DAL;
 using GT_Find.Lay_outs;
-
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GT_Find
@@ -37,9 +28,8 @@ namespace GT_Find
             {
                 if (AuthManager.ValidateUser(password, hashedPasswordFromDatabase))
                 {
-                    // Set the username and user ID in the User class
-                    User.Username = username;
-                    User.UserId = gtService.RetrieveUserId(username);
+                    // Set the username and user ID in the UserSession class
+                    UserSession.CurrentUser = new User(username, gtService.RetrieveUserId(username));
 
                     MessageBox.Show("Login successful!");
 

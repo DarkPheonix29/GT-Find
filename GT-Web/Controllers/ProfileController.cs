@@ -1,5 +1,6 @@
 ﻿using BLL;
 using BLL.Models;
+using BLL.Validators;
 using GT_Web.Extensions;
 using GT_Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -43,19 +44,31 @@ namespace GT_Web.Controllers
         {
             try
             {
-                var profileInfo = new ProfileInfo(
-                    User.GetUserId(),
-                    User.Identity.Name, // Use the current user's identity name for the Username
-                    viewModel.Bio,
-                    viewModel.Region,
-                    viewModel.Country,
-                    viewModel.Platform,
-                    viewModel.Fun,
-                    viewModel.Competitive,
-                    viewModel.Serious,
-                    viewModel.Communication,
-                    viewModel.Dedication
-                );
+                var profileInfo = viewModel.ToProfileInfo(User.GetUserId(), User.Identity.Name);
+
+                if (!Validator.IsValidCountry(profileInfo.Country))
+                {
+                    TempData["Error"] = "Invalid country.";
+                    return RedirectToAction("Index");
+                }
+
+                if (!Validator.IsValidRegion(profileInfo.Region))
+                {
+                    TempData["Error"] = "Invalid region.";
+                    return RedirectToAction("Index");
+                }
+
+                if (!Validator.IsValidPlatform(profileInfo.Platform))
+                {
+                    TempData["Error"] = "Invalid platform.";
+                    return RedirectToAction("Index");
+                }
+
+                if (!Validator.IsValidUsername(profileInfo.Username))
+                {
+                    TempData["Error"] = "Username cannot be longer than 20 characters.";
+                    return RedirectToAction("Index");
+                }
 
                 var success = _gtService.SaveProfile(
                     profileInfo.UserID,
@@ -87,6 +100,10 @@ namespace GT_Web.Controllers
                 {
                     TempData["Error"] = "Failed to save profile!";
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                TempData["Error"] = $"An error occurred: {ex.Message}";
             }
             catch (Exception ex)
             {

@@ -1,23 +1,15 @@
 ﻿using BLL;
 using DAL;
 using GT_Find.Lay_outs;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace GT_Find
 {
     public partial class Signup : Form
     {
         private readonly GTService gtService;
+
         public Signup()
         {
             InitializeComponent();
@@ -26,7 +18,7 @@ namespace GT_Find
 
         private void Signup_Load(object sender, EventArgs e)
         {
-
+            // Initialize the form if needed
         }
 
         private void signupbtn_Click(object sender, EventArgs e)
@@ -43,10 +35,16 @@ namespace GT_Find
             string email = emailsutext.Text;
             string username = usersutext.Text;
 
+            if (!BLL.Validators.Validator.IsValidUsername(username))
+            {
+                MessageBox.Show("Username cannot be longer than 20 characters.");
+                return;
+            }
+
             // Hash password
             string hashedPassword = AuthManager.SecurePassword(passwordtext);
 
-            // Call GTData method to create account
+            // Call GTService method to create account
             bool accountCreated = gtService.CreateAccount(email, hashedPassword, username);
 
             if (accountCreated)
